@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-import LoginCarousel from '../assets/img/ImgLib';
+// import LoginCarousel from '../assets/img/ImgLib';
+import LoginCarousel from '../assets/img/ImgLib.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
