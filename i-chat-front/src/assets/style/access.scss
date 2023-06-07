@@ -85,12 +85,33 @@ wrapper {
         position: relative;
         background-color: #050214;
         .panLeft {
-            background: var(--bg-url) no-repeat center/cover;
-            border-radius: 0px 40px 40px 0px;
             opacity: .8;
+            @media only screen and (min-width: 992px){
+                background: var(--bg-url) no-repeat center/cover;
+                border-radius: 0px 40px 40px 0px;
+            }
+            @media only screen and (max-width: 991px){
+                background: #e3e2e5 var(--bg-url) no-repeat center top/cover;
+                border-radius: 0px 0px 40px 40px;
+                min-height: 35vh;
+            }
         }
         .panRight {
-            padding: 10rem 2.5rem;
+            @media only screen and (min-width: 992px){
+                padding: 10rem 2.5rem;
+            }
+            @media only screen and (max-width: 991px){
+                padding: 3rem 2.5rem;
+            }
         }
     }
+}
+
+
+.loginAlise a img {
+    width: 2rem;
+    height: 2rem;
+}
+.loginAlise {
+    text-align: center;
 }

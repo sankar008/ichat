@@ -42,7 +42,7 @@ const Login = () => {
 
                         <div className="mt-5">
                             <p className="text-divider text-center">or continue with</p>
-                            <ul className="list-inline">
+                            <ul className="list-inline loginAlise">
                                 <li className="list-inline-item"><a href="#"><img src={loginImg.facebook.default} alt="" /></a></li>
                                 <li className="list-inline-item"><a href="#"><img src={loginImg.apple.default} alt="" /></a></li>
                                 <li className="list-inline-item"><a href="#"><img src={loginImg.google.default} alt="" /></a></li>
