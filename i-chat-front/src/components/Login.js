@@ -5,6 +5,8 @@ import '../assets/style/access.scss'
 import * as loginImg from '../assets/img/ImgLib.js';
 
 const Login = () => {
+    console.log(loginImg.google.default);
+
   return (
     <>
     <wrapper>
@@ -41,9 +43,9 @@ const Login = () => {
                         <div className="mt-5">
                             <p className="text-divider text-center">or continue with</p>
                             <ul className="list-inline">
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.facebook} alt="" /></a></li>
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.apple} alt="" /></a></li>
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.google} alt="" /></a></li>
+                                <li className="list-inline-item"><a href="#"><img src={loginImg.facebook.default} alt="" /></a></li>
+                                <li className="list-inline-item"><a href="#"><img src={loginImg.apple.default} alt="" /></a></li>
+                                <li className="list-inline-item"><a href="#"><img src={loginImg.google.default} alt="" /></a></li>
                             </ul>
                         </div>
                     </div>
