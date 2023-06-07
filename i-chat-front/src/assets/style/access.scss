@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import '~bootstrap/scss/bootstrap';
+@import './var/var';
+
+html, body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.text-divider {
+    color: #B5B5B5;
+    position: relative;
+}
+.btn-theme.btn-primary {
+    --bs-btn-bg: rgba(var(--adalt-blue-rgb), 80%);
+    --bs-btn-border-color: rgba(var(--adalt-blue-rgb), 80%);
+    --bs-btn-hover-border-color: rgba(var(--adalt-blue-rgb), 80%);
+    --bs-btn-hover-bg: var(--adalt-blue);
+    --bs-btn-active-bg: var(--adalt-blue);
+    --bs-btn-active-border-color: var(--adalt-blue);
+    border-radius: 16px 16px 0px 16px;
+    padding: 14px 32px;
+}
+.btn-theme.btn-danger {
+    --bs-btn-bg: rgba(var(--color-red-rgb), 80%);
+    --bs-btn-border-color: rgba(var(--color-red-rgb), 80%);
+    --bs-btn-hover-border-color: rgba(var(--color-red-rgb), 80%);
+    --bs-btn-hover-bg: var(--color-red);
+    --bs-btn-active-bg: var(--color-red);
+    --bs-btn-active-border-color: var(--color-red);
+    border-radius: 16px 16px 0px 16px;
+    padding: 14px 32px;
+}
+.link-theme.link-primary {
+    --bs-primary-rgb: var(--adalt-blue-rgb);
+    --bs-link-hover-color-rgb: var(--adalt-blue-rgb);
+    --bs-link-opacity: .8;
+    &:hover, &:focus {
+        color: RGBA(var(--adalt-blue-rgb), 1) !important
+    }
+}
+
+
+
+.form-theme .form-control {
+    --bs-border-width: 2px;
+    --bs-border-radius: 0;
+    background: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    color: var(--bs-white);
+    label {
+        color: currentColor;
+        &::after {
+            background-color: transparent;
+        }
+    }
+    &:focus, &:not(:placeholder-shown) {
+        box-shadow: none;
+        & ~ label {
+            color: currentColor;
+            transform: scale(0.85) translateY(-1.5rem) translateX(-0.65rem);
+            &:after {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+
+wrapper {
+    position: relative;
+    max-height: 100vh;
+    .headerDefault {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    body-main {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 100vh;
+        position: relative;
+        background-color: #050214;
+        .panLeft {
+            background: var(--bg-url) no-repeat center/cover;
+            border-radius: 0px 40px 40px 0px;
+            opacity: .8;
+        }
+        .panRight {
+            padding: 10rem 2.5rem;
+        }
+    }
+}

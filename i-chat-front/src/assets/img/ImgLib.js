@@ -8,7 +8,11 @@ export default HomeBg
 
 export const logo = require('./logo.png')
 export const bg = require('./homeBanner-bg.jpg')
-export const loginBg = require('./login-bg.jpg')
+export const signBg = require('./LogIn.png')
+export const loginBg = require('./SignIn.png')
+export const facebook = require('./facebook.svg')
+export const apple = require('./apple.svg')
+export const google = require('./google.svg')
 const LoginCarousel = {
     carousel_1: require('./slide-1.png'),
     carousel_2: require('./slide-2.png'),
