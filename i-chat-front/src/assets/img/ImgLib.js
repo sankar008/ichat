@@ -7,6 +7,7 @@ export default HomeBg
  */
 
 export const logo = require('./logo.png')
+export const logoChild = require('./iChat-kids.png')
 export const bg = require('./homeBanner-bg.jpg')
 export const signBg = require('./LogIn.png')
 export const loginBg = require('./SignIn.png')

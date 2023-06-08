@@ -108,10 +108,47 @@ wrapper {
 }
 
 
-.loginAlise a img {
-    width: 2rem;
-    height: 2rem;
+.slidePan {
+    background: url('../img/login-bg.jpg') no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .carouselWrapper {
+        max-width: 25rem;
+        padding: 1rem;
+        // background-color: #fff;
+        background-color: #3c3f46;
+        .carousel-login {
+            // background: linear-gradient(142.13deg, #FEF8FF 1.8%, #fef8ff 99.75%);
+            background: linear-gradient(142.13deg, #050214 1.8%, #353335 99.75%);
+            box-shadow: 0 0 8px 0 #00000042;
+            backdrop-filter: blur(75.2372px);
+            border-radius: 46.6321px;
+            padding: 2rem 3rem;
+            color: #fff;
+            & .swiper-slide:not(.swiper-slide-active) {
+                opacity: 0 !important;
+            }
+            img {
+                margin-bottom: 1rem;
+                padding: 1rem;
+                padding-top: 0;
+                filter: grayscale(1) contrast(0) brightness(1.5);
+            }
+            .swiper-pagination-bullet {
+                --swiper-theme-color: var(--kids-blue);
+                --swiper-pagination-bullet-inactive-color: #475E69;
+                --swiper-pagination-bullet-inactive-opacity: 1;
+            }
+        }
+    }
 }
+  
+
 .loginAlise {
     text-align: center;
+    a img {
+        width: 2rem;
+        height: 2rem;
+    }
 }

@@ -27,7 +27,7 @@ const Home = () => {
                       <h1 className="banner-title display-4 fw-bold">The hottest social media app for children and adults!</h1>
                       <p className="cont text-muted">A lead paragrap lorem ipsum lorem ipsum</p>
 
-                      <Link className="btn btn-theme btn-primary my-4" to="/login">Get started!</Link>
+                      <Link className="btn btn-theme btn-primary my-4" to="/account-type">Get started!</Link>
                       <Link className="link-primary link-theme link-underline-opacity-0 d-block">Watch video</Link>
                   </div>
               </div>

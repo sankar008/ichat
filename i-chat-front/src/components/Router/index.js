@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "../components/Header"; */
 import Home from "../Home";
 import Aboutus from "../Aboutus";
+import AccountType from "../AccountType";
 import Signup from "../Signup";
 import Login from "../Login";
 const BasicRoutes = () => {
@@ -12,6 +13,7 @@ const BasicRoutes = () => {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutus />} />
+        <Route path="/account-type" element={<AccountType />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         </Routes>
