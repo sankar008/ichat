@@ -5,17 +5,22 @@ import Header from "../components/Header"; */
 import Home from "../Home";
 import Aboutus from "../Aboutus";
 import AccountType from "../AccountType";
-import Signup from "../Signup";
-import Login from "../Login";
+import SignupParent from "../SignupParent";
+import SignupChild from "../SignupChild";
+import LoginChild from "../LoginChild"
+import LoginParent from "../LoginParent";
+
 const BasicRoutes = () => {
   return (
     <Router>
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<Aboutus />} />
-        <Route path="/account-type" element={<AccountType />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<Aboutus />} />
+          <Route path="/account-type" element={<AccountType />} />
+          <Route path="/signup-parent" element={<SignupParent />} />
+          <Route path="/signup-child" element={<SignupChild />} />
+          <Route path="/login-parent" element={<LoginParent />} />
+          <Route path="/login-child" element={<LoginChild />} />
         </Routes>
       {/* <Header />
       <Routes>

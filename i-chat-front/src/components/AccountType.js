@@ -6,8 +6,10 @@ import LoginCarousel from '../assets/img/ImgLib.js';
 import * as imgPath from '../assets/img/ImgLib.js'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCheckSquare, faCoffeem, faArrowRight } from '@fortawesome/fontawesome-free-solid'
+import { faEnvelope, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import 'swiper/css';
 import "swiper/css/effect-fade";
@@ -75,29 +77,33 @@ const AccountType = () => {
                   </div>
                   <div className="col-12 col-md-6 panRight">
                     <div className="panWrapper text-light form-theme">
-                        <p className="text-end">Don’t have an account? <Link to="/signup">Register</Link></p>
+                        {/* <p className="text-end">Don’t have an account? <Link className='link-theme link-danger link-underline-opacity-0' to="/signup">Register</Link></p> */}
                         <span className="display-6 h5 mb-4 d-block">Login</span>
                         <span className="d-block mb-2">Tell us what type of account you’d like to log on.</span>
 
                         <ul className="list-unstyled acType">
                             <li className='type-item'>
-                                <Link className='d-flex align-items-center link-light' to="">
+                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/login-parent">
                                     <img className='img-fluid' src={ imgPath.logo } alt="" />
                                     <div className="cont">
                                         <h6 className="title">Parents</h6>
-                                        <p className="m-0 text-muted">Adults account to manage all your activity.</p>
+                                        <p className="m-0">Adults account to manage all your activity.</p>
                                     </div>
-                                    {/* <FontAwesomeIcon icon="fa-solid fa-arrow-right" /> */}
+                                    <div className="icon-holder">
+                                        <FontAwesomeIcon icon={faArrowRight} />
+                                    </div>
                                 </Link>
                             </li>
                             <li className='type-item'>
-                                <Link className='d-flex align-items-center link-light' to="">
+                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/login-child">
                                     <img className='img-fluid' src={ imgPath.logoChild } alt="" />
                                     <div className="cont">
                                         <h6 className="title">Kids</h6>
-                                        <p className="m-0 text-muted">Account with curated content for your kids.</p>
+                                        <p className="m-0">Account with curated content for your kids.</p>
                                     </div>
-                                    {/* <FontAwesomeIcon icon="fa-solid fa-arrow-right" /> */}
+                                    <div className="icon-holder">
+                                        <FontAwesomeIcon icon={faArrowRight} />
+                                    </div>
                                 </Link>
                             </li>
                         </ul>

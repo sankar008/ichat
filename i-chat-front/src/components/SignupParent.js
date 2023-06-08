@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import '../assets/style/access.scss'
 import * as loginImg from '../assets/img/ImgLib.js';
 
-const Signup = () => {
+const SignupParent = () => {
   return (
     <>
     <wrapper>
@@ -29,7 +29,7 @@ const Signup = () => {
                     <div className="panWrapper text-light form-theme">
                         <span className="display-6 h5 mb-4 d-block">Sign in</span>
                         <span className="d-block mb-2">If you already have an account register</span>
-                        <span className="d-block">You can <Link className='link-danger link-underline-opacity-0' to="/login">Login here !</Link></span>
+                        <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/login-parent">Login here !</Link></span>
 
                         <h4 className="display-6 my-5">Let’s start with your first name</h4>
 
@@ -50,4 +50,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignupParent
