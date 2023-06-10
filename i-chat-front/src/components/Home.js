@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 import * as HomeIMG from "../assets/img/ImgLib";
 
+
 const Home = () => {
   return (
     <>
-    <wrapper>
+    <page-wrapper>
       <header className="headerDefault">
           <div className="container">
               <div className="row g-1">
@@ -33,7 +34,7 @@ const Home = () => {
               </div>
           </div>
       </body-main>
-    </wrapper>
+    </page-wrapper>
     </>
   );
 };

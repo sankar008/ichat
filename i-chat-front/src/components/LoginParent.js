@@ -9,7 +9,7 @@ const LoginParent = () => {
 
   return (
     <>
-    <wrapper>
+    <page-wrapper>
       <header className="headerDefault">
           <div className="container">
               <div className="row g-1">
@@ -43,9 +43,9 @@ const LoginParent = () => {
                         <div className="mt-5">
                             <p className="text-divider text-center">or continue with</p>
                             <ul className="list-inline loginAlise">
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.facebook.default} alt="" /></a></li>
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.apple.default} alt="" /></a></li>
-                                <li className="list-inline-item"><a href="#"><img src={loginImg.google.default} alt="" /></a></li>
+                                <li className="list-inline-item"><Link to="#"><img src={loginImg.facebook.default} alt="" /></Link></li>
+                                <li className="list-inline-item"><Link to="#"><img src={loginImg.apple.default} alt="" /></Link></li>
+                                <li className="list-inline-item"><Link to="#"><img src={loginImg.google.default} alt="" /></Link></li>
                             </ul>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ const LoginParent = () => {
             </div>
        </div>
       </body-main>
-    </wrapper>
+    </page-wrapper>
     </>
   )
 }

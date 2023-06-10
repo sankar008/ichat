@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 
 import '../assets/style/access.scss'
 import * as loginImg from '../assets/img/ImgLib.js';
 
 const SignupParent = () => {
+  const [isField, setisField] = useState(1);
+console.log('hello')
+
   return (
     <>
-    <wrapper>
+    <page-wrapper>
       <header className="headerDefault">
           <div className="container">
               <div className="row g-1">
@@ -32,11 +35,14 @@ const SignupParent = () => {
                         <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/login-parent">Login here !</Link></span>
 
                         <h4 className="display-6 my-5">Let’s start with your first name</h4>
-
-                        <div className="form-floating my-5">
-                            <input type="text" className="form-control" id="u-name" placeholder="Enter your First name" />
-                            <label htmlFor="u-name">Firstname</label>
-                        </div>
+                        {isField === 0 (
+                          <>
+                            <div className="form-floating my-5">
+                                <input type="text" className="form-control" id="u-name" placeholder="Enter your First name" />
+                                <label htmlFor="u-name">Firstname</label>
+                            </div>
+                          </>
+                        )}
                         <button className="btn btn-theme btn-danger w-100">Continue</button>
 
 
@@ -45,7 +51,7 @@ const SignupParent = () => {
             </div>
        </div>
       </body-main>
-    </wrapper>
+    </page-wrapper>
     </>
   )
 }

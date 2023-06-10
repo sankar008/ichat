@@ -5,21 +5,25 @@ import { Link } from "react-router-dom";
 import LoginCarousel from '../assets/img/ImgLib.js';
 import * as imgPath from '../assets/img/ImgLib.js'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
+import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import 'swiper/css';
 import "swiper/css/effect-fade";
+/* import 'swiper/swiper.scss';
+import 'swiper/components/effect-fade/effect-fade.scss'; */
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+
+SwiperCore.use([EffectFade]);
 
 const AccountType = () => {
   return (
     <>
-    <wrapper>
+    <page-wrapper>
       <header className="headerDefault">
           <div className="container">
               <div className="row g-1">
@@ -52,7 +56,7 @@ const AccountType = () => {
                                 clickable: true,
                             }}
                             //navigation={true}
-                            modules={[EffectFade, Navigation, Pagination]}
+                            modules={[Autoplay, EffectFade, Navigation, Pagination]}
                             //onSlideChange={() => console.log('slide change')}
                             onSwiper={(swiper) => console.log(swiper)}
                             className='carousel-login'
@@ -112,7 +116,7 @@ const AccountType = () => {
               </div>
           </div>
       </body-main>
-    </wrapper>
+    </page-wrapper>
     </>
   )
 }

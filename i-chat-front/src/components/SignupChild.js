@@ -7,7 +7,7 @@ import * as loginImg from '../assets/img/ImgLib.js';
 const SignupChild = () => {
   return (
     <>
-    <wrapper>
+    <page-wrapper>
       <header className="headerDefault">
           <div className="container">
               <div className="row g-1">
@@ -45,7 +45,7 @@ const SignupChild = () => {
             </div>
        </div>
       </body-main>
-    </wrapper>
+    </page-wrapper>
     </>
   )
 }
