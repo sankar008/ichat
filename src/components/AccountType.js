@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 // import LoginCarousel from '../assets/img/ImgLib';
 import LoginCarousel from '../assets/img/ImgLib.js';
 import * as imgPath from '../assets/img/ImgLib.js'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
-
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
+
 
 import 'swiper/css';
 import "swiper/css/effect-fade";
@@ -48,6 +49,7 @@ const AccountType = () => {
                             centeredSlides={true}
                             //fadeEffect={fade}
                             effect={"fade"}
+                            speed="1500"
                             autoplay={{
                                 delay: 2500,
                                 //disableOnInteraction: false,
@@ -87,7 +89,7 @@ const AccountType = () => {
 
                         <ul className="list-unstyled acType">
                             <li className='type-item'>
-                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/login-parent">
+                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/parent/login">
                                     <img className='img-fluid' src={ imgPath.logo } alt="" />
                                     <div className="cont">
                                         <h6 className="title">Parents</h6>
@@ -99,7 +101,7 @@ const AccountType = () => {
                                 </Link>
                             </li>
                             <li className='type-item'>
-                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/login-child">
+                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/child/login">
                                     <img className='img-fluid' src={ imgPath.logoChild } alt="" />
                                     <div className="cont">
                                         <h6 className="title">Kids</h6>

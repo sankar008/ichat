@@ -13,7 +13,7 @@ const Home = () => {
               <div className="row g-1">
                   <div className="col-md-1">
                       <Link className="d-block" to="#">
-                        <img className="img-fluid" src={ HomeIMG.logo } alt="" />
+                        <img className="img-fluid" src={ HomeIMG.logoLight } alt="" />
                       </Link>
                   </div>
                   <div className="col-md-10 border-bottom"></div>

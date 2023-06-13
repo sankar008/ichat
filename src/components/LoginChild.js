@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import '../assets/style/access.scss'
 import * as loginImg from '../assets/img/ImgLib.js';
 
-const LoginParent = () => {
+const LoginChild = () => {
     console.log(loginImg.google.default);
 
   return (
@@ -26,12 +26,12 @@ const LoginParent = () => {
       <body-main>
        <div className="container-fluid">
             <div className="row h-100">
-                <div className="col-12 col-lg-7 panLeft" style={{'--bg-url': 'url('+loginImg.loginParentBg+')'}}></div>
+                <div className="col-12 col-lg-7 panLeft" style={{'--bg-url': 'url('+loginImg.loginChildBg+')'}}></div>
                 <div className="col-12 col-lg-5 panRight">
                     <div className="panWrapper text-light form-theme">
                         <span className="display-6 h5 mb-4 d-block">Sign in</span>
                         <span className="d-block mb-2">Don’t have an account?</span>
-                        <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/signup-parent">Register here!</Link></span>
+                        <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/child/signup">Register here!</Link></span>
 
                         <div className="form-floating my-5">
                             <input type="email" className="form-control" id="u-email" placeholder="Enter your email address" />
@@ -58,4 +58,4 @@ const LoginParent = () => {
   )
 }
 
-export default LoginParent
+export default LoginChild

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 /* import Footer from "../components/Footer";
 import Header from "../components/Header"; */
 import Home from "../Home";
@@ -9,6 +10,7 @@ import SignupParent from "../SignupParent";
 import SignupChild from "../SignupChild";
 import LoginChild from "../LoginChild"
 import LoginParent from "../LoginParent";
+import Profile from "../Profile";
 import Page404 from "../Page404";
 
 const BasicRoutes = () => {
@@ -18,10 +20,11 @@ const BasicRoutes = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<Aboutus />} />
           <Route exact path="/account-type" element={<AccountType />} />
-          <Route exact path="/signup-parent" element={<SignupParent />} />
-          <Route exact path="/signup-child" element={<SignupChild />} />
-          <Route exact path="/login-parent" element={<LoginParent />} />
-          <Route exact path="/login-child" element={<LoginChild />} />
+          <Route exact path="/parent/signup" element={<SignupParent />} />
+          <Route exact path="/child/signup" element={<SignupChild />} />
+          <Route exact path="/parent/login" element={<LoginParent />} />
+          <Route exact path="/child/login" element={<LoginChild />} />
+          <Route exact path="/profile" element={<Profile />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       {/* <Header />
