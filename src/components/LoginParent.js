@@ -15,7 +15,7 @@ const LoginParent = () => {
               <div className="row g-1">
                   <div className="col-md-1">
                       <Link className="d-block" to="/">
-                        <img className="img-fluid" src={ loginImg.logo } alt="" />
+                        <img className="img-fluid" src={ loginImg.logoLight } alt="" />
                       </Link>
                   </div>
                   <div className="col-md-10 "></div>

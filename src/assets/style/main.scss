@@ -135,6 +135,9 @@ page-wrapper {
         // top: 0;
         // left: 0;
     }
+    .headerDefault:has(+ .bg-home) {
+        z-index: 2;
+    }
     body-main {
         display: flex;
         flex-wrap: wrap;
@@ -144,7 +147,11 @@ page-wrapper {
         &.bg-home {
             justify-content: center;
             align-items: center;
+            color: var(--bs-light);
             z-index: 1;
+            .banner-title, .cont {
+                mix-blend-mode: difference;
+            }
             &:after, &:before {
                 --size: 35%;
                 content: "";
@@ -167,14 +174,16 @@ page-wrapper {
             }
             @media only screen and (min-width: 769px) {
                 &.bg-home { 
-                    background: url(../img/homeBanner-bg.jpg) no-repeat center bottom
-                    //, linear-gradient(#000, #000);
+                    --bs-secondary-color: rgba(var(--bs-light-rgb), .5);
+                    background: url(../img/homeBanner-bg.png) no-repeat center bottom/80vw, linear-gradient(#000, #000);
+                    // background: url(../img/homeBanner-bg.png) no-repeat center bottom/contain, linear-gradient(#000, #000);
+                    // background: url(../img/homeBanner-bg.png) no-repeat center 530px/contain, linear-gradient(#000, #000);
                 }
             }
             @media only screen and (max-width: 768px) {
                 &.bg-home {
-                    background: url(../img/homeBanner-bg.jpg) no-repeat center bottom/117%
-                    //, linear-gradient(#000, #000);
+                    --bs-secondary-color: rgba(var(--bs-light-rgb), .5);
+                    background: url(../img/homeBanner-bg.png) no-repeat center bottom/117%, linear-gradient(#000, #000);
                 }
             }
         }
@@ -196,7 +205,7 @@ page-wrapper {
 
 
 .sec-main {
-    // background: rgba(var(--color-dark-rgb));
+    background: rgba(var(--color-dark-rgb));
     color: rgba(var(--bs-light-rgb), .9);
     padding: 4rem 0;
     .dtl-profile {

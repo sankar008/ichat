@@ -30,10 +30,10 @@ const AccountType = () => {
               <div className="row g-1">
                   <div className="col-md-1">
                       <Link className="d-block" to="#">
-                        <img className="img-fluid" src={ imgPath.logo } alt="" />
+                        <img className="img-fluid" src={ imgPath.logoLight } alt="" />
                       </Link>
                   </div>
-                  <div className="col-md-10 border-bottom"></div>
+                  <div className="col-md-10 "></div>
                   <div className="col-md-1"></div>
               </div>
           </div>
