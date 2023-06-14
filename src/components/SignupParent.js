@@ -10,12 +10,12 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 /* import { StyledEngineProvider } from '@mui/material/styles'; */
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { TextField } from '@mui/material';
 import OTPInput from "otp-input-react";
 import * as appUtils from "../helper/validation";
-import { toast, ToastContainer } from "react-toastify";
+// import { toast, ToastContainer } from "react-toastify";
 
 
 const SignupParent = () => {
