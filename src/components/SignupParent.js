@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 import '../assets/style/access.scss'
 import * as loginImg from '../assets/img/ImgLib.js';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+
 /* import { StyledEngineProvider } from '@mui/material/styles'; */
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -27,13 +30,13 @@ const SignupParent = () => {
 
   const storeRegistrationData = (isField) =>{
     if(isField === 0 && firstName == ''){
-      seterrMessage("First name is a require field");
+      seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> First name is a require field</span></>);
     }else if(isField === 1 && lastName == ''){
-      seterrMessage("Last name is a require field");
+      seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> Last name is a require field</span></>);
     }else if(isField === 2 && email == ''){
-      seterrMessage("Email id is a require field");
+      seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> Email id is a require field</span></>);
     }else if(isField === 2 && appUtils.validateEmail(email) !== 1){
-      seterrMessage("Invalid Email Id");
+      seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> Invalid Email Id</span></>);
     }else{
       seterrMessage("");
       let stage = ++isField;
@@ -118,6 +121,7 @@ const SignupParent = () => {
                               </h4>
                               <div className="form-floating my-5">
                               <OTPInput
+                                  className="validateOpt"
                                   value={OTP}
                                   onChange={setOTP}
                                   autoFocus
@@ -155,7 +159,7 @@ const SignupParent = () => {
                             </>
                           ):``
                         }
-                        <span className='text-danger'>{errMessage}</span>
+                        {errMessage}
                         <button className="btn btn-theme btn-danger w-100" onClick={() => storeRegistrationData(isField)}>Continue</button>
                        
                     </div>
