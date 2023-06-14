@@ -12,18 +12,33 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { TextField } from '@mui/material';
 import OTPInput from "otp-input-react";
 import * as appUtils from "../helper/validation";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const SignupParent = () => {
   const [isField, setisField] = React.useState(0);
   const [dateValue, setDateValue] = React.useState(null)
   const [email, setEmail] = React.useState('')
+  const [firstName, setfirstName] = React.useState('')
+  const [lastName, setlastName] = React.useState('')
   const [OTP, setOTP] = React.useState("");
 
+  const [errMessage, seterrMessage] = React.useState("");
 
   const storeRegistrationData = (isField) =>{
-    let stage = ++isField;
-    setisField(stage);
+    if(isField === 0 && firstName == ''){
+      seterrMessage("First name is a require field");
+    }else if(isField === 1 && lastName == ''){
+      seterrMessage("Last name is a require field");
+    }else if(isField === 2 && email == ''){
+      seterrMessage("Email id is a require field");
+    }else if(isField === 2 && appUtils.validateEmail(email) !== 1){
+      seterrMessage("Invalid Email Id");
+    }else{
+      seterrMessage("");
+      let stage = ++isField;
+      setisField(stage);
+    }    
   }
 
 
@@ -31,12 +46,13 @@ const SignupParent = () => {
     const { name, value } = e.target;
     if(name === 'emailId'){
       setEmail(value)
+    }else if(name === 'firstName'){
+      setfirstName(value)
+    }else if(name === 'lastName'){
+      setlastName(value)
     }
 
   }
-
-  
-
 
   return (
     <>
@@ -68,18 +84,18 @@ const SignupParent = () => {
                             <>
                               <h4 className="display-6 my-5">Let’s start with your first name</h4>
                               <div className="form-floating my-5">
-                                <input type="text" className="form-control" id="u-name" placeholder="Enter your First name"  onChange={handalerChanges}/>
-                                <label htmlFor="u-name">First Name</label>
+                                <input type="text" className="form-control" name="firstName" id="firstName" placeholder="Enter your First name"  onChange={handalerChanges}/>
+                                <label htmlFor="firstName">First Name</label>
                               </div>
                             </>
                           ):``
                         }{
                           isField === 1?(
                           <>
-                            <h4 className="display-6 my-5">Let’s start with your first name</h4>
+                            <h4 className="display-6 my-5">Let’s start with your last name</h4>
                             <div className="form-floating my-5">
-                              <input type="text" className="form-control" id="u-email" placeholder="Last name"  onChange={handalerChanges}/>
-                              <label htmlFor="u-email">Last Name</label>
+                              <input type="text" className="form-control" id="lastName" name="lastName" placeholder="Last name"  onChange={handalerChanges}/>
+                              <label htmlFor="lastName">Last Name</label>
                             </div>
                           </>
                         ):``
@@ -139,8 +155,9 @@ const SignupParent = () => {
                             </>
                           ):``
                         }
-                         
+                        <span className='text-danger'>{errMessage}</span>
                         <button className="btn btn-theme btn-danger w-100" onClick={() => storeRegistrationData(isField)}>Continue</button>
+                       
                     </div>
                 </div>
             </div>
