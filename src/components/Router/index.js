@@ -6,10 +6,10 @@ import Header from "../components/Header"; */
 import Home from "../Home";
 import Aboutus from "../Aboutus";
 import AccountType from "../AccountType";
-import SignupParent from "../SignupParent";
-import SignupChild from "../SignupChild";
-import LoginChild from "../LoginChild"
-import LoginParent from "../LoginParent";
+import SignupParent from "../parents/SignupParent";
+import SignupChild from "../kids/SignupChild";
+import LoginChild from "../kids/LoginChild"
+import LoginParent from "../parents/LoginParent";
 import Profile from "../Profile";
 import Page404 from "../Page404";
 

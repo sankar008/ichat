@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 
-import '../assets/style/access.scss'
-import * as loginImg from '../assets/img/ImgLib.js';
+import '../../assets/style/access.scss'
+import * as loginImg from '../../assets/img/ImgLib.js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { TextField } from '@mui/material';
 import OTPInput from "otp-input-react";
-import * as appUtils from "../helper/validation";
+import * as appUtils from "../../helper/validation";
 
 const SignupChild = () => {
   const [isField, setisField] = React.useState(0);
