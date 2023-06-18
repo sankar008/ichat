@@ -11,6 +11,7 @@ import SignupChild from "../kids/SignupChild";
 import LoginChild from "../kids/LoginChild"
 import LoginParent from "../parents/LoginParent";
 import Profile from "../Profile";
+import Feed from "../Feed";
 import Page404 from "../Page404";
 
 const BasicRoutes = () => {
@@ -25,6 +26,7 @@ const BasicRoutes = () => {
           <Route exact path="/parent/login" element={<LoginParent />} />
           <Route exact path="/child/login" element={<LoginChild />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/feed" element={<Feed />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       {/* <Header />
