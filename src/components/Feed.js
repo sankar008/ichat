@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react'
-
+import { Link } from 'react-router-dom';
 
 import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
+
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+
+import { MdHomeFilled, MdOutlineExplore, MdMenu } from "react-icons/md"
+import { BiSearch } from "react-icons/bi"
+import { BsMessenger, BsHeart } from "react-icons/bs"
+import { FiPlusSquare } from 'react-icons/fi'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
@@ -14,20 +21,12 @@ const Feed = () => {
   return (
     <>
         <main className='py-5'>
-
-
             <div className="container">
                 <div className="row g-4">
-
-
                     <div className="col-lg-3">
-
-
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center justify-content-center">
                             <a href="/"><img className='img-fluid' src={ imgFeed.logoLight } alt="" /></a>
                         </div>
-
-
 
                         <nav className="navbar navbar-expand-lg mx-0">
                             <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasSideNavbar">
@@ -42,58 +41,57 @@ const Feed = () => {
                                 <div className="offcanvas-body d-block px-2 px-lg-0">
                                     <div className="card overflow-hidden bg-transparent border-0">
 
-                                        <div className="card-body">
+                                        <div className="card-body navLeft">
 
 
-                                            <ul className="nav nav-link-secondary flex-column fw-bold gap-2">
+                                            <ul className="nav nav-link-secondary flex-column fw-bold gap-3">
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#"> 
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/home-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to=""> 
+                                                        <MdHomeFilled className="navIcon" size="1.6em" />
                                                         <span>Home </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <BiSearch className="navIcon" size="1.6em" />
                                                         <span>Search </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/earth-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <MdOutlineExplore className="navIcon" size="1.6em" />
                                                         <span>Explore </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#"> <img
-                                                            className="me-2 h-20px fa-fw"
-                                                            src="assets/images/icon/calendar-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="" >
+                                                        <BsMessenger className="navIcon" size="1.45em" />
                                                         <span>Messages </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/chat-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <BsHeart className="navIcon" size="1.4em" />
                                                         <span>Notifications </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/notification-outlined-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <FiPlusSquare className="navIcon" size="1.4em" />
                                                         <span>Create </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/notification-outlined-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <Avatar className="navIcon" alt="" src={ imgFeed.userDefault } sx={{ width: 22, height: 22 }} />
                                                         <span>Profile </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" href="#">
-                                                        <img className="me-2 h-20px fa-fw" src="assets/images/icon/cog-outline-filled.svg" alt="" />
+                                                    <Link className="nav-link" to="">
+                                                        <MdMenu className="navIcon" size="1.4em" />
                                                         <span>More </span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
 
@@ -103,14 +101,11 @@ const Feed = () => {
                                 </div>
                             </div>
                         </nav>
-
                     </div>
 
 
 
                     <div className="col-md-8 col-lg-6 vstack gap-4">
-
-
                         <div className="d-flex gap-2 mb-n3">
                             <div className="position-relative">
                                 <div
@@ -127,11 +122,11 @@ const Feed = () => {
 
 
                             <div id="stories" className="storiesWrapper stories-square stories user-icon carousel scroll-enable stories user-icon carousel snapgram ">
-                                <div className="story " data-id="user-1" data-photo="assets/images/post/1by1/02.jpg"
+                                <div className="story " data-id="user-1" data-photo={ imgFeed.userOne }
                                     data-last-updated="1687118471.136">
                                     <a className="item-link" href="">
                                         <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/02.jpg" />
+                                            <img lazy="eager" src={ imgFeed.userOne } />
                                         </span>
                                         <span className="info" itemProp="author" itemScope=""
                                             itemType="http://schema.org/Person">
@@ -143,22 +138,22 @@ const Feed = () => {
 
                                     <ul className="items">
                                         <li className="" data-id="user1-story1">
-                                            <a href="assets/images/albums/01.jpg" data-link="" data-linktext=""
+                                            <a href={ imgFeed.userTwo } data-link="" data-linktext=""
                                                 data-time="1687118471.136" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
+                                                <img loading="auto" src={ imgFeed.userTwo } />
                                             </a>
                                         </li>
                                         <li className="" data-id="user1-story2">
-                                            <a href="assets/images/videos/video-call.mp4" data-link="" data-linktext=""
+                                            <a href={ imgFeed.userThree } data-link="" data-linktext=""
                                                 data-time="1687118471.136" data-type="video" data-length="">
-                                                <img loading="auto" src="" />
+                                                <img loading="auto" src={ imgFeed.userThree } />
                                             </a>
                                         </li>
                                         <li className="" data-id="user1-story3">
-                                            <a href="assets/images/albums/02.jpg" data-link="https://webestica.com/"
+                                            <a href={ imgFeed.userFour } data-link="https://webestica.com/"
                                                 data-linktext="Visit my Portfolio" data-time="1687118471.136" data-type="photo"
                                                 data-length="5">
-                                                <img loading="auto" src="" />
+                                                <img loading="auto" src={ imgFeed.userFour } />
                                             </a>
                                         </li>
                                     </ul>
@@ -310,7 +305,7 @@ const Feed = () => {
                             <div className="d-flex mb-3">
 
                                 <div className="avatar avatar-xs me-2">
-                                    <a href="#"> <img className="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="" /> </a>
+                                    <Link to=""> <img className="avatar-img rounded-circle" src={ imgFeed.userDefault } alt="" /> </Link>
                                 </div>
 
                                 <form className="w-100">
@@ -360,8 +355,9 @@ const Feed = () => {
                             <div className="col-sm-6 col-lg-12">
                                 <div className="card bg-transparent border-0" style={{'--bs-card-bg': 'transparent !important'}}>
 
-                                    <div className="card-header">
-                                        <h5 className="card-title mb-0">Suggestions for you</h5>
+                                    <div className="card-header bg-transparent px-0 d-flex align-items-center justify-content-between">
+                                        <h5 className="card-title fs-6 mb-0">Suggestions for you</h5>
+                                        <Link className="link-light fs-6 link-underline-opacity-0">See All</Link>
                                     </div>
 
 
@@ -379,43 +375,33 @@ const Feed = () => {
                                             >
                                             <ListItem className="px-0">
                                                 <ListItemAvatar>
-                                                <Avatar>
-                                                    {/* <ImageIcon /> */}
-                                                </Avatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
                                                 <ListItemText primary="imkir" secondary="Follows you" />
                                             </ListItem>
                                             {/* <Spacer variant="inset" component="li" space="12px"/> */}
                                             <ListItem className="px-0">
                                                 <ListItemAvatar>
-                                                <Avatar>
-                                                    {/* <WorkIcon /> */}
-                                                </Avatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>   
                                                 <ListItemText primary="organic__al" secondary="Followed by chirag_singla17" />
                                             </ListItem>
                                                 {/* <Spacer component="li" sx={{marginLeft: '5%', marginRight: '5%'}} space="12px"/> */}
                                             <ListItem className="px-0">
                                                 <ListItemAvatar>
-                                                <Avatar>
-                                                    {/* <BeachAccessIcon /> */}
-                                                </Avatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
                                                 <ListItemText primary="im_gr" secondary="Followed by chirag_singla17" />
                                             </ListItem>
                                             <ListItem className="px-0">
                                                 <ListItemAvatar>
-                                                <Avatar>
-                                                    {/* <BeachAccessIcon /> */}
-                                                </Avatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
                                                 <ListItemText primary="abh952" secondary="Follows you" />
                                             </ListItem>
                                             <ListItem className="px-0">
                                                 <ListItemAvatar>
-                                                <Avatar>
-                                                    {/* <BeachAccessIcon /> */}
-                                                </Avatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
                                                 <ListItemText primary="sakbrl" secondary="Follows you" />
                                             </ListItem>
