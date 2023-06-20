@@ -2002,3 +2002,21 @@ main {
   [data-bs-theme=dark] .light-mode-item {
     display: none !important;
   }
+
+
+
+.navLeft .nav-item .nav-link {
+  border-radius: 50px;
+  background-color: rgba(var(--bs-white-rgb), 0.05);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  color: rgba(var(--bs-white-rgb), .7);
+  box-shadow: 0 1px 3px 0 #00000075;
+  .navIcon {
+    margin-right: 1rem;
+  }
+  &:hover {
+    color: rgba(var(--bs-white-rgb), 1);
+  }
+}

@@ -28,3 +28,9 @@ const LoginCarousel = {
     carousel_3: require('./slide-3.png'),
 }
 export default LoginCarousel
+
+export const userDefault = require('./users/user-common.jpg')
+export const userOne = require('./users/user-1.jpg')
+export const userTwo = require('./users/user-2.jpg')
+export const userThree = require('./users/user-3.jpg')
+export const userFour = require('./users/user-4.jpg')
