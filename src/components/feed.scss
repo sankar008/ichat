@@ -2020,3 +2020,9 @@ main {
     color: rgba(var(--bs-white-rgb), 1);
   }
 }
+
+
+.stories-square.stories .story > .item-link > .item-preview {
+  height: unset !important;
+  width: unset !important;
+}

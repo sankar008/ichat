@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import './feed.scss'
@@ -6,15 +6,29 @@ import * as imgFeed from '../assets/img/ImgLib'
 
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 
+import { Zuck } from 'zuck.js';
+import 'zuck.js/css';
+import 'zuck.js/skins/snapgram';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+
 import { MdHomeFilled, MdOutlineExplore, MdMenu } from "react-icons/md"
 import { BiSearch } from "react-icons/bi"
 import { BsMessenger, BsHeart } from "react-icons/bs"
 import { FiPlusSquare } from 'react-icons/fi'
+import { FaPlus } from 'react-icons/fa';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
+
+
 const Feed = () => {
+    let [ feedList, setFeedList ] = useState(stories)
     useEffect(() => {
         document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark')
     }, [])
@@ -112,8 +126,7 @@ const Feed = () => {
                                     className="card border border-2 border-dashed h-150px px-4 px-sm-5 shadow-none d-flex align-items-center justify-content-center text-center">
                                     <div>
                                         <a className="stretched-link btn btn-light rounded-circle icon-md" href="#!">
-                                            <i className="fa-solid fa-plus">
-                                            </i>
+                                            <FaPlus />
                                         </a>
                                         <h6 className="mt-2 mb-0 small">Add Story</h6>
                                     </div>
@@ -122,181 +135,46 @@ const Feed = () => {
 
 
                             <div id="stories" className="storiesWrapper stories-square stories user-icon carousel scroll-enable stories user-icon carousel snapgram ">
-                                <div className="story " data-id="user-1" data-photo={ imgFeed.userOne }
-                                    data-last-updated="1687118471.136">
-                                    <a className="item-link" href="">
+                                {feedList.map((fl) => 
+                                <div key={fl.id} className="story " data-id="user-1" data-photo={ fl.photo } data-last-updated="1687118471.136">
+                                    <Link className="item-link" to="#">
                                         <span className="item-preview">
-                                            <img lazy="eager" src={ imgFeed.userOne } />
+                                            <img lazy="eager" src={ fl.photo } alt={ fl.name } height="32px" width="32px" />
                                         </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Samera</strong>
-                                            <span className="time">
-                                            </span>
+                                        <span className="info" itemProp="author" itemScope="" itemType="http://schema.org/Person">
+                                            <strong className="name" itemProp="name">{ fl.name }</strong>
+                                            <span className="time"></span>
                                         </span>
-                                    </a>
+                                    </Link>
 
                                     <ul className="items">
                                         <li className="" data-id="user1-story1">
                                             <a href={ imgFeed.userTwo } data-link="" data-linktext=""
                                                 data-time="1687118471.136" data-type="photo" data-length="5">
-                                                <img loading="auto" src={ imgFeed.userTwo } />
+                                                <img loading="auto" src={ imgFeed.userTwo } alt="" />
                                             </a>
                                         </li>
                                         <li className="" data-id="user1-story2">
                                             <a href={ imgFeed.userThree } data-link="" data-linktext=""
                                                 data-time="1687118471.136" data-type="video" data-length="">
-                                                <img loading="auto" src={ imgFeed.userThree } />
+                                                <img loading="auto" src={ imgFeed.userThree } alt="" />
                                             </a>
                                         </li>
                                         <li className="" data-id="user1-story3">
                                             <a href={ imgFeed.userFour } data-link="https://webestica.com/"
                                                 data-linktext="Visit my Portfolio" data-time="1687118471.136" data-type="photo"
                                                 data-length="5">
-                                                <img loading="auto" src={ imgFeed.userFour } />
+                                                <img loading="auto" src={ imgFeed.userFour } alt="" />
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="story " data-id="user-2" data-photo="assets/images/post/1by1/03.jpg"
-                                    data-last-updated="1687118471.137">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/03.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Julien</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user2-story1">
-                                            <a href="assets/images/albums/03.jpg" data-link="" data-linktext=""
-                                                data-time="1687118471.137" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="story " data-id="user-3" data-photo="assets/images/post/1by1/04.jpg"
-                                    data-last-updated="1687118471.137">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/04.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Mariane</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user3-story1">
-                                            <a href="assets/images/albums/04.jpg" data-link="" data-linktext=""
-                                                data-time="1687118471.137" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="story " data-id="user-4" data-photo="assets/images/post/1by1/05.jpg"
-                                    data-last-updated="1687118471.137">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/05.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Lori Stevens</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user4-story1">
-                                            <a href="assets/images/albums/05.jpg" data-link="" data-linktext=""
-                                                data-time="1687118471.137" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="story " data-id="user-5" data-photo="assets/images/post/1by1/06.jpg"
-                                    data-last-updated="1687118471.137">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/06.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Samuel Bishop</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user5-story1">
-                                            <a href="assets/images/albums/06.jpg" data-link="" data-linktext=""
-                                                data-time="1687118471.137" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="story " data-id="user-6" data-photo="assets/images/post/1by1/07.jpg"
-                                    data-last-updated="1687118471.137">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/post/1by1/07.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Joan Wallace</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user6-story1">
-                                            <a href="assets/images/albums/06.jpg" data-link="" data-linktext=""
-                                                data-time="1687118471.137" data-type="photo" data-length="5">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="story " data-id="user-7" data-photo="assets/images/albums/05.jpg"
-                                    data-last-updated="">
-                                    <a className="item-link" href="">
-                                        <span className="item-preview">
-                                            <img lazy="eager" src="assets/images/albums/05.jpg" />
-                                        </span>
-                                        <span className="info" itemProp="author" itemScope=""
-                                            itemType="http://schema.org/Person">
-                                            <strong className="name" itemProp="name">Carolyn Ortiz</strong>
-                                            <span className="time">
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <ul className="items">
-                                        <li className="" data-id="user7-story1">
-                                            <a href="assets/images/albums/05.jpg" data-link="" data-linktext="" data-time=""
-                                                data-type="photo" data-length="3">
-                                                <img loading="auto" src="" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                )}
+                                
+                                
                             </div>
+
+                            
                         </div>
 
 
@@ -329,22 +207,52 @@ const Feed = () => {
                                 </li>
                                 <li className="nav-item dropdown ms-lg-auto">
                                     <div className="d-flex align-items-center">
-                                        <a className="nav-link bg-light py-1 px-2 mb-0 me-2" href="#" id="feedActionShare"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <Link className="nav-link bg-light py-1 px-2 mb-0 me-2" to="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
                                             <FontAwesomeIcon icon={faTwitter} />
-                                        </a>
-                                        <a className="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        </Link>
+                                        <Link className="nav-link bg-light py-1 px-2 mb-0" to="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
                                             <FontAwesomeIcon icon={faInstagram} />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </li>
                             </ul>
 
                         </div>
 
-
-
+                        <Swiper
+                            spaceBetween={30}
+                            slidesPerView={1}
+                            centeredSlides={true}
+                            //fadeEffect={fade}
+                            effect={"fade"}
+                            speed="1500"
+                            autoplay={{
+                                delay: 2500,
+                                //disableOnInteraction: false,
+                            }}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            //navigation={true}
+                            modules={[Autoplay, EffectFade, Navigation, Pagination]}
+                            //onSlideChange={() => console.log('slide change')}
+                            onSwiper={(swiper) => console.log(swiper)}
+                            className='carousel-login'
+                            style={{maxWidth: '600px'}}
+                            >
+                            <SwiperSlide>
+                                <h3 className="title">Curated content for your kids</h3>
+                                <p>Talk about one of the features of your application & how it will help your users</p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <h3 className="title">Two-factor authentication</h3>
+                                <p>Talk about one of the features of your application & how it will help your users</p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <h3 className="title">Connect with your friends</h3>
+                                <p>Talk about one of the features of your application & how it will help your users</p>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
 
 
@@ -417,35 +325,34 @@ const Feed = () => {
 
                             <ul className="nav small mt-4 lh-1">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">About</a>
+                                    <Link className="nav-link" to="#">About</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Help</a>
+                                    <Link className="nav-link" to="#">Help</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Press</a>
+                                    <Link className="nav-link" to="#">Press</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" target="_blank" href="#">API</a>
+                                    <Link className="nav-link" target="_blank" to="#">API</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" target="_blank" href="#">Jobs</a>
+                                    <Link className="nav-link" target="_blank" to="#">Jobs</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Privacy</a>
+                                    <Link className="nav-link" to="#">Privacy</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Terms</a>
+                                    <Link className="nav-link" to="#">Terms</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Locations</a>
+                                    <Link className="nav-link" to="#">Locations</Link>
                                 </li>
                             </ul>
                             
 
 
-                            <p className="small mt-1">©2023 <a className="text-body" target="_blank"
-                                    href="#"> ichat </a>
+                            <p className="small mt-1">©2023 <Link className="text-body" target="_blank" to="#"> ichat </Link>
                             </p>
 
                         </div>
@@ -460,5 +367,159 @@ const Feed = () => {
     </>
   )
 }
+
+
+const timestamp = function () {
+    let timeIndex = 1678166046264 / 1000;
+    let random = Math.floor(Math.random() * 1000);
+  
+    return Math.round(timeIndex - random);
+  };
+
+let stories = [
+    {
+      id: 'ramon',
+      photo: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/users/1.jpg',
+      name: 'Ramon',
+      time: timestamp(),
+      items: [
+        {
+          id: 'ramon-1',
+          type: 'photo',
+          length: 3,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/1.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/1.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        },
+        {
+          id: 'ramon-2',
+          type: 'video',
+          length: 0,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/2.mp4',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/2.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        },
+        {
+          id: 'ramon-3',
+          type: 'photo',
+          length: 3,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/3.png',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/3.png',
+          link: 'https://ramon.codes',
+          linkText: 'Visit my Portfolio',
+          time: timestamp()
+        }
+      ]
+    },
+    {
+      id: 'gorillaz',
+      photo:
+        'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/users/2.jpg',
+      name: 'Gorillaz',
+      time: timestamp(),
+      items: [
+        {
+          id: 'gorillaz-1',
+          type: 'video',
+          length: 0,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/4.mp4',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/4.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        },
+        {
+          id: 'gorillaz-2',
+          type: 'photo',
+          length: 3,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/5.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/5.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        }
+      ]
+    },
+    {
+      id: 'ladygaga',
+      photo:
+        'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/users/3.jpg',
+      name: 'Lady Gaga',
+      time: timestamp(),
+      items: [
+        {
+          id: 'ladygaga-1',
+          type: 'photo',
+          length: 5,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/6.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/6.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        },
+        {
+          id: 'ladygaga-2',
+          type: 'photo',
+          length: 3,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/7.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/7.jpg',
+          link: 'http://ladygaga.com',
+          linkText: false,
+          time: timestamp()
+        }
+      ]
+    },
+    {
+      id: 'starboy',
+      photo:
+        'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/users/4.jpg',
+      name: 'The Weeknd',
+      time: timestamp(),
+      items: [
+        {
+          id: 'starboy-1',
+          type: 'photo',
+          length: 5,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/8.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/8.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        }
+      ]
+    },
+    {
+      id: 'riversquomo',
+      photo:
+        'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/users/5.jpg',
+      name: 'Rivers Cuomo',
+      time: timestamp(),
+      items: [
+        {
+          id: 'riverscuomo-1',
+          type: 'photo',
+          length: 10,
+          src: 'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/9.jpg',
+          preview:
+            'https://raw.githubusercontent.com/ramonszo/assets/master/zuck.js/stories/9.jpg',
+          link: '',
+          linkText: false,
+          time: timestamp()
+        }
+      ]
+    }
+]
 
 export default Feed
