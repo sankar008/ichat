@@ -7,15 +7,12 @@ import * as loginImg from '../../assets/img/ImgLib.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
-/* import { StyledEngineProvider } from '@mui/material/styles'; */
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { TextField } from '@mui/material';
 import OTPInput from "otp-input-react";
 import * as appUtils from "../../helper/validation";
-// import { toast, ToastContainer } from "react-toastify";
 
 const initialvalue = {
   firstName: "",
@@ -32,7 +29,6 @@ const SignupParent = () => {
   const [errMessage, seterrMessage] = React.useState("");
 
   const storeRegistrationData = (isField) =>{
-
     if(isField === 0 && formData.firstName == ''){
       seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> First name is a require field</span></>);
     }else if(isField === 1 && formData.lastName == ''){
@@ -52,7 +48,6 @@ const SignupParent = () => {
   const handalerChanges = (e) => {
     const { name, value } = e.target;
     setformData({ ...formData, [name]: value });
-
   }
 
   return (
@@ -112,49 +107,54 @@ const SignupParent = () => {
                           ):``
                         }{
                           isField === 3?(
+                          <>
+                            <h4 className="display-6 my-5">What’s your password?</h4>
+                            <div className="form-floating my-5">
+                              <input type="password" className="form-control" id="password" name="password" placeholder="Password"  onChange={handalerChanges}/>
+                              <label htmlFor="password">Enter your password</label>
+                            </div>
+                          </>
+                        ):``
+                      }{
+                          isField === 4?(
                             <>
-                              <h4 className="display-6 my-5">
-                                Enter the OTP<br/>
-                                <small className='fs-6'>A code has been sent to { formData.emailId }</small> 
-                              </h4>
-                              <div className="form-floating my-5">
-                              <OTPInput
-                                  className="validateOpt"
-                                  value={OTP}
-                                  onChange={setOTP}
-                                  autoFocus
-                                  OTPLength={6}
-                                  otpType="number"
-                                  disabled={false}
-                                />
-                              </div>
+                                 <h4 className="display-6 my-5">When’s your birthday?</h4>
+                                 <LocalizationProvider className="" dateAdapter={AdapterDayjs}>
+                                   <MobileDatePicker 
+                                     className="form-control my-5"
+                                     label="Select Date of Birth"
+                                     views={['day', 'month', 'year']}
+                                     format="d MMMM YYYY"
+                                     placeholder="Select your date of birth"
+                                     inputProps={{
+                                       placeholder: "Placeholder"
+                                     }}
+                                     value={dateValue}
+                                     onChange={(newValue) => setDateValue(newValue)}
+                                     renderInput={(params) => <TextField {...params} placeholder='Select your date of birth' />}
+                                   />
+                                 </LocalizationProvider>
                             </>
                           ):``
                         }{
-                          isField === 4?(
+                          isField === 5?(
                             <>
-                              <h4 className="display-6 my-5">When’s your birthday?</h4>
-                              {/* <div className="form-floating my-5">
-                                <input type="text" className="form-control" id="u-birth-d" placeholder="Select your date of birth" />
-                                <label htmlFor="u-birth-d">Select your date of birth</label>
-                              </div> */}
-
-                              <LocalizationProvider className="" dateAdapter={AdapterDayjs}>
-                                <MobileDatePicker 
-                                  className="form-control my-5"
-                                  label="Select Date of Birth"
-                                  views={['day', 'month', 'year']}
-                                  format="d MMMM YYYY"
-                                  placeholder="Select your date of birth"
-                                  inputProps={{
-                                    placeholder: "Placeholder"
-                                  }}
-                                  value={dateValue}
-                                  onChange={(newValue) => setDateValue(newValue)}
-                                  renderInput={(params) => <TextField {...params} placeholder='Select your date of birth' />}
-                                />
-                              </LocalizationProvider>
-                            </>
+                            <h4 className="display-6 my-5">
+                              Enter the OTP<br/>
+                              <small className='fs-6'>A code has been sent to { formData.emailId }</small> 
+                            </h4>
+                            <div className="form-floating my-5">
+                            <OTPInput
+                                className="validateOpt"
+                                value={OTP}
+                                onChange={setOTP}
+                                autoFocus
+                                OTPLength={6}
+                                otpType="number"
+                                disabled={false}
+                              />
+                            </div>
+                          </>
                           ):``
                         }
                         {errMessage}
