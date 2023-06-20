@@ -120,33 +120,18 @@ const SignupChild = () => {
                           ):``
                         }{
                           isField === 3?(
-                            <>
-                              <h4 className="display-6 my-5">
-                                Enter the OTP<br/>
-                                <small className='fs-6'>A code has been sent to { email }</small> 
-                              </h4>
-                              <div className="form-floating my-5">
-                              <OTPInput
-                                  className="validateOpt"
-                                  value={OTP}
-                                  onChange={setOTP}
-                                  autoFocus
-                                  OTPLength={6}
-                                  otpType="number"
-                                  disabled={false}
-                                />
-                              </div>
-                            </>
-                          ):``
-                        }{
-                          isField === 4?(
-                            <>
+                          <>
+                            <h4 className="display-6 my-5">What’s your password?</h4>
+                            <div className="form-floating my-5">
+                              <input type="password" className="form-control" id="password" name="password" placeholder="Password"  onChange={handalerChanges}/>
+                              <label htmlFor="password">Enter your password</label>
+                            </div>
+                          </>
+                        ):``
+                      }{
+                          isField === 4?(                
+                              <>
                               <h4 className="display-6 my-5">When’s your birthday?</h4>
-                              {/* <div className="form-floating my-5">
-                                <input type="text" className="form-control" id="u-birth-d" placeholder="Select your date of birth" />
-                                <label htmlFor="u-birth-d">Select your date of birth</label>
-                              </div> */}
-
                               <LocalizationProvider className="" dateAdapter={AdapterDayjs}>
                                 <MobileDatePicker 
                                   className="form-control my-5"
@@ -163,6 +148,26 @@ const SignupChild = () => {
                                 />
                               </LocalizationProvider>
                             </>
+                          ):``
+                        }{
+                          isField === 5?(
+                            <>
+                            <h4 className="display-6 my-5">
+                              Enter the OTP<br/>
+                              <small className='fs-6'>A code has been sent to { email }</small> 
+                            </h4>
+                            <div className="form-floating my-5">
+                            <OTPInput
+                                className="validateOpt"
+                                value={OTP}
+                                onChange={setOTP}
+                                autoFocus
+                                OTPLength={6}
+                                otpType="number"
+                                disabled={false}
+                              />
+                            </div>
+                          </>
                           ):``
                         }
                         {errMessage}
