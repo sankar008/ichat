@@ -93,10 +93,10 @@ const LoginChild = () => {
                         {
                           isField === 0?(
                             <>
-                            <div className="form-floating my-5">
-                            <input type="email" className="form-control" id="emailId" name="emailId" placeholder="Enter your registered email id" onChange={handalerChanges}/>
-                            <label htmlFor="emailId">Email ID</label>
-                            </div>
+                              <div className="form-floating my-5">
+                                <input type="email" className="form-control" id="emailId" name="emailId" placeholder="Enter your registered email id" onChange={handalerChanges}/>
+                                <label htmlFor="emailId">Email ID</label>
+                              </div>
                             </>
                           ):``
                         }
@@ -108,6 +108,7 @@ const LoginChild = () => {
                                     <input type="password" className="form-control" id="password" name="password" placeholder="Enter password" onChange={handalerChanges}/>
                                     <label htmlFor="password">Password</label>
                                 </div>
+                              <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to="">Forgot password</Link></div>
                              </>
                         ):``
                         }

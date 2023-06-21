@@ -6,6 +6,7 @@ import * as loginImg from '../../assets/img/ImgLib.js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { MdLockReset } from 'react-icons/md'
 
 /* import { StyledEngineProvider } from '@mui/material/styles'; */
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -137,7 +138,7 @@ const SignupChild = () => {
                                   className="form-control my-5"
                                   label="Select Date of Birth"
                                   views={['day', 'month', 'year']}
-                                  format="d MMMM YYYY"
+                                  format="ddd D MMMM YYYY"
                                   placeholder="Select your date of birth"
                                   inputProps={{
                                     placeholder: "Placeholder"
@@ -167,6 +168,7 @@ const SignupChild = () => {
                                 disabled={false}
                               />
                             </div>
+                            <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to=""><MdLockReset size="24" /> Resend OTP</Link></div>
                           </>
                           ):``
                         }
