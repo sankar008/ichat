@@ -90,7 +90,7 @@ const SignupChild = () => {
     setformData({ ...formData, [name]: value });
   }
 
-  const submitData = async () =>{
+  const submitData = async () =>{    
     const url = c.SIGNUP;
     const data = {
       email: formData.emailId,
@@ -111,13 +111,13 @@ const SignupChild = () => {
       };
       localStorage.setItem("__tokenCode", JSON.stringify(headerObj));
       seterrMessage(<><span className='text-success mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> OTP has been sent to your reistered Email ID</span></>);  
-      setisField(5);
+      setisField(6);
     }else{
         seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} />{response.data.message}</span></>);
     }   
   }
 
-  const otpVerification = async () => {    
+  const otpVerification = async () => {  
     const url = c.USER + "/email-verified";
     const data = {
       email: formData.emailId,
@@ -239,7 +239,7 @@ const SignupChild = () => {
                         }{
                           isField === 6?(
                             <>
-                            <h4 className="display-6 my-5">
+                            <h4 className="display-6 my-5">storeRegistrationData
                               Enter the OTP<br/>
                               <small className='fs-6'>A code has been sent to { formData.emailId }</small> 
                             </h4>
