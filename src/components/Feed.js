@@ -31,7 +31,20 @@ const Feed = () => {
     let [ feedList, setFeedList ] = useState(stories)
     useEffect(() => {
         document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark')
+        autoResize()
     }, [])
+    
+    function autoResize() {
+        document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+			var offset = element.offsetHeight - element.clientHeight;
+            console.log(offset)
+			element.addEventListener('input', function (event) {
+				event.target.style.height = 'auto';
+				event.target.style.height = event.target.scrollHeight + offset + 'px';
+			});
+		});
+    }
+
   return (
     <>
         <main className='py-5'>
@@ -187,7 +200,7 @@ const Feed = () => {
                                 </div>
 
                                 <form className="w-100">
-                                    <textarea className="form-control pe-4 border-0" rows="2" data-autoresize="" placeholder="Say something....."></textarea>
+                                    <textarea className="form-control pe-4 border-0" rows="2" onInput={autoResize()} data-autoresize="" placeholder="Say something....."></textarea>
                                 </form>
                             </div>
 
