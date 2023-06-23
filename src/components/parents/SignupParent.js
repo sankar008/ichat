@@ -185,7 +185,7 @@ const SignupParent = () => {
                                      className="form-control my-5"
                                      label="Select Date of Birth"
                                      views={['day', 'month', 'year']}
-                                     format="ddd D MMMM YYYY"
+                                     format="D MMMM YYYY"
                                      placeholder="Select your date of birth"
                                      inputProps={{
                                        placeholder: "Placeholder"
