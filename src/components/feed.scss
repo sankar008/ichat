@@ -2026,3 +2026,18 @@ main {
   height: unset !important;
   width: unset !important;
 }
+
+
+
+.feed-post-carousel { 
+  .swiper-slide { 
+    .feed-media-wrapper { 
+      img {
+        width: 100%;
+        height: 53rem;
+        object-fit: contain;
+        background: #000;
+      }
+    }
+  }
+}

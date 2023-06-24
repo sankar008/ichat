@@ -34,3 +34,8 @@ export const userOne = require('./users/user-1.jpg')
 export const userTwo = require('./users/user-2.jpg')
 export const userThree = require('./users/user-3.jpg')
 export const userFour = require('./users/user-4.jpg')
+export const postSlider = {
+    img1: require('./post1.png'),
+    img2: require('./post2.jpg'),
+    img3: require('./post3.jpg'),
+}

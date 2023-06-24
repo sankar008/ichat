@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
+import { postSlider } from '../assets/img/ImgLib';
 
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 
@@ -246,26 +247,31 @@ const Feed = () => {
                             pagination={{
                                 clickable: true,
                             }}
-                            //navigation={true}
+                            navigation={true}
+                            dots={true}
                             modules={[Autoplay, EffectFade, Navigation, Pagination]}
                             //onSlideChange={() => console.log('slide change')}
                             onSwiper={(swiper) => console.log(swiper)}
-                            className='carousel-login'
+                            className='feed-post-carousel'
                             style={{maxWidth: '600px'}}
                             >
                             <SwiperSlide>
-                                <h3 className="title">Curated content for your kids</h3>
-                                <p>Talk about one of the features of your application & how it will help your users</p>
+                                <div className="feed-media-wrapper">
+                                    <img className="img-fluid" src={ postSlider.img1 } alt='' />
+                                </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <h3 className="title">Two-factor authentication</h3>
-                                <p>Talk about one of the features of your application & how it will help your users</p>
+                                <div className="feed-media-wrapper">
+                                    <img className="img-fluid" src={ postSlider.img2 } alt='' />
+                                </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <h3 className="title">Connect with your friends</h3>
-                                <p>Talk about one of the features of your application & how it will help your users</p>
+                                <div className="feed-media-wrapper">
+                                    <img className="img-fluid" src={ postSlider.img3 } alt='' />
+                                </div>
                             </SwiperSlide>
                         </Swiper>
+                        <p>Talk about one of the features of your application & how it will help your users</p>
                     </div>
 
 
