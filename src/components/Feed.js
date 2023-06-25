@@ -5,7 +5,7 @@ import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
 import { postSlider } from '../assets/img/ImgLib';
 
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 
 import { Zuck } from 'zuck.js';
 import 'zuck.js/css';
@@ -19,9 +19,9 @@ import 'swiper/scss/navigation';
 
 import { MdHomeFilled, MdOutlineExplore, MdMenu, MdVerified } from "react-icons/md"
 import { BiSearch, BiVideo } from "react-icons/bi"
-import { BsMessenger, BsHeart, BsEmojiSmile } from "react-icons/bs"
+import { BsMessenger, BsHeart, BsEmojiSmile, BsChat, BsSend, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs"
 import { FiPlusSquare } from 'react-icons/fi'
-import { FaPlus, FaVideo } from 'react-icons/fa';
+import { FaHeart, FaPlus, FaVideo } from 'react-icons/fa';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
@@ -279,9 +279,23 @@ const Feed = () => {
                                                 </div>
                                             </SwiperSlide>
                                         </Swiper>
-                                        <p>Talk about one of the features of your application & how it will help your users</p>
+                                    </div>
+                                    <div className="card-footer">
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item"><Link className='link-light'><BsHeart size="20" /></Link></li>
+                                                <li class="list-inline-item"><Link className='link-light'><BsChat size="20" /></Link></li>
+                                                <li class="list-inline-item"><Link className='link-light'><BsSend size="20" /></Link></li>
+                                            </ul>
+
+                                            <Button className='text-light' style={{minWidth: 'auto'}}><BsBookmark size="20" /></Button>
+                                        </div>
                                     </div>
                                 </div>
+                                <span className="d-block my-2">741,368 likes</span>
+                                <p><b>lewishamilton</b> For every video we upload to YouTube we create different versions of the final thumbnail. <Button size="small" ><span>...more</span></Button></p>
+                                <span className="d-block text-muted my-2">View all 37 comments</span>
+                                <textarea className="form-control" name="" id="" placeholder='Add a comment…'></textarea>
                             </div>
                             <div className="col-12">
                                 <div className="py-3">
