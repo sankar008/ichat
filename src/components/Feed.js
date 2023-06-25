@@ -12,19 +12,20 @@ import 'zuck.js/css';
 import 'zuck.js/skins/snapgram';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import 'swiper/scss';
+import 'swiper/scss/pagination';
+import 'swiper/scss/navigation';
 
 
-import { MdHomeFilled, MdOutlineExplore, MdMenu } from "react-icons/md"
-import { BiSearch } from "react-icons/bi"
-import { BsMessenger, BsHeart } from "react-icons/bs"
+import { MdHomeFilled, MdOutlineExplore, MdMenu, MdVerified } from "react-icons/md"
+import { BiSearch, BiVideo } from "react-icons/bi"
+import { BsMessenger, BsHeart, BsEmojiSmile } from "react-icons/bs"
 import { FiPlusSquare } from 'react-icons/fi'
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaVideo } from 'react-icons/fa';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import SuggestionCard from './particals/SuggestionCard';
 
 
 
@@ -193,7 +194,7 @@ const Feed = () => {
 
 
 
-                        <div className="card card-body">
+                        <div className="card card-body mb-5">
                             <div className="d-flex mb-3">
 
                                 <div className="avatar avatar-xs me-2">
@@ -206,18 +207,16 @@ const Feed = () => {
                             </div>
 
                             <ul className="nav nav-pills nav-stack small fw-normal">
-                                <li className="nav-item">
-                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
-                                        data-bs-target="#feedActionVideo"> <i
-                                            className="bi bi-camera-reels-fill text-info pe-2">
-                                        </i>Video</a>
+                                <li className="nav-item me-2">
+                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo">
+                                        <BiVideo size="20" /> Video
+                                    </a>
                                 </li>
                                
                                 <li className="nav-item">
-                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
-                                        data-bs-target="#modalCreateFeed"> <i
-                                            className="bi bi-emoji-smile-fill text-warning pe-2">
-                                        </i>Activity</a>
+                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                                        <BsEmojiSmile /> Activity
+                                    </a>
                                 </li>
                                 <li className="nav-item dropdown ms-lg-auto">
                                     <div className="d-flex align-items-center">
@@ -230,48 +229,71 @@ const Feed = () => {
                                     </div>
                                 </li>
                             </ul>
-
                         </div>
 
-                        <Swiper
-                            spaceBetween={30}
-                            slidesPerView={1}
-                            centeredSlides={true}
-                            //fadeEffect={fade}
-                            effect={"fade"}
-                            speed="1500"
-                            autoplay={{
-                                delay: 2500,
-                                //disableOnInteraction: false,
-                            }}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            navigation={true}
-                            dots={true}
-                            modules={[Autoplay, EffectFade, Navigation, Pagination]}
-                            //onSlideChange={() => console.log('slide change')}
-                            onSwiper={(swiper) => console.log(swiper)}
-                            className='feed-post-carousel'
-                            style={{maxWidth: '600px'}}
-                            >
-                            <SwiperSlide>
-                                <div className="feed-media-wrapper">
-                                    <img className="img-fluid" src={ postSlider.img1 } alt='' />
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <div className="d-flex align-items-center">
+                                            <Avatar className='me-2' />
+                                            <span className="h5 me-2">fauxrivererian</span>
+                                            <MdVerified className='text-primary'/>
+                                        </div>
+                                    </div>
+                                    <div className="card-body p-0">
+                                        <Swiper
+                                            spaceBetween={30}
+                                            slidesPerView={1}
+                                            // centeredSlides={true}
+                                            //fadeEffect={fade}
+                                            effect={"fade"}
+                                            speed="1500"
+                                            autoplay={{
+                                                delay: 2500,
+                                                disableOnInteraction: false,
+                                            }}
+                                            pagination={{
+                                                clickable: true,
+                                            }}
+                                            navigation={true}
+                                            modules={[Autoplay, EffectFade, Navigation, Pagination]}
+                                            //onSlideChange={() => console.log('slide change')}
+                                            onSwiper={(swiper) => console.log(swiper)}
+                                            className='feed-post-carousel'
+                                            // style={{maxWidth: '600px'}}
+                                            >
+                                            <SwiperSlide>
+                                                <div className="feed-media-wrapper">
+                                                    <img className="img-fluid" src={ postSlider.img1 } alt='' />
+                                                </div>
+                                            </SwiperSlide>
+                                            <SwiperSlide>
+                                                <div className="feed-media-wrapper">
+                                                    <img className="img-fluid" src={ postSlider.img2 } alt='' />
+                                                </div>
+                                            </SwiperSlide>
+                                            <SwiperSlide>
+                                                <div className="feed-media-wrapper">
+                                                    <img className="img-fluid" src={ postSlider.img3 } alt='' />
+                                                </div>
+                                            </SwiperSlide>
+                                        </Swiper>
+                                        <p>Talk about one of the features of your application & how it will help your users</p>
+                                    </div>
                                 </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="feed-media-wrapper">
-                                    <img className="img-fluid" src={ postSlider.img2 } alt='' />
+                            </div>
+                            <div className="col-12">
+                                <div className="py-3">
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <h5 className="sugg">Suggestions for you</h5>
+                                        <Link className=''>See all</Link>
+                                    </div>
+                                    <SuggestionCard />
                                 </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="feed-media-wrapper">
-                                    <img className="img-fluid" src={ postSlider.img3 } alt='' />
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
-                        <p>Talk about one of the features of your application & how it will help your users</p>
+                            </div>
+                        </div>
+
                     </div>
 
 

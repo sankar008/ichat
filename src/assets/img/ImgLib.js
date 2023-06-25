@@ -39,3 +39,7 @@ export const postSlider = {
     img2: require('./post2.jpg'),
     img3: require('./post3.jpg'),
 }
+export const suggestionUser = {
+    user1: require('./users/sugg-user1.jpg'),
+    user2: require('./users/sugg-user2.jpg'),
+}
