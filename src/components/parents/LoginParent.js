@@ -51,7 +51,8 @@ const LoginParent = () => {
         const url = c.USER + "/login";
         const data = {
             email: formData.emailId,
-            password: formData.password
+            password: formData.password,
+            role: "parent"
         }
 
         const response = await axios.post(url, data);
@@ -65,7 +66,7 @@ const LoginParent = () => {
             localStorage.setItem("__tokenCode", JSON.stringify(headerObj));
             navigate("/profile");    
         }else{
-            seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} />{response.data.message}</span></>);
+            seterrMessage(<><span className='text-danger mb-3 d-block'><FontAwesomeIcon icon={faTriangleExclamation} /> {response.data.message}</span></>);
         }
     
       }

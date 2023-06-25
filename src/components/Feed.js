@@ -282,10 +282,10 @@ const Feed = () => {
                                     </div>
                                     <div className="card-footer">
                                         <div className="d-flex align-items-center justify-content-between">
-                                            <ul class="list-inline mb-0">
-                                                <li class="list-inline-item"><Link className='link-light'><BsHeart size="20" /></Link></li>
-                                                <li class="list-inline-item"><Link className='link-light'><BsChat size="20" /></Link></li>
-                                                <li class="list-inline-item"><Link className='link-light'><BsSend size="20" /></Link></li>
+                                            <ul className="list-inline mb-0">
+                                                <li className="list-inline-item"><Link className='link-light'><BsHeart size="20" /></Link></li>
+                                                <li className="list-inline-item"><Link className='link-light'><BsChat size="20" /></Link></li>
+                                                <li className="list-inline-item"><Link className='link-light'><BsSend size="20" /></Link></li>
                                             </ul>
 
                                             <Button className='text-light' style={{minWidth: 'auto'}}><BsBookmark size="20" /></Button>
