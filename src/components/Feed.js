@@ -5,7 +5,7 @@ import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
 import { postSlider } from '../assets/img/ImgLib';
 
-import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 
 import { Zuck } from 'zuck.js';
 import 'zuck.js/css';
@@ -208,18 +208,19 @@ const Feed = () => {
 
                             <ul className="nav nav-pills nav-stack small fw-normal">
                                 <li className="nav-item me-2">
-                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo">
+                                    <a className="nav-link rounded-pill bg-light text-white py-1 px-4 mb-0" href="#!">
                                         <BiVideo size="20" /> Video
                                     </a>
                                 </li>
                                
                                 <li className="nav-item">
-                                    <a className="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                                    <a className="nav-link rounded-pill bg-light text-white py-1 px-4 mb-0" href="#!" >
                                         <BsEmojiSmile /> Activity
                                     </a>
                                 </li>
                                 <li className="nav-item dropdown ms-lg-auto">
                                     <div className="d-flex align-items-center">
+                                        <span className='me-3'>Share to</span>
                                         <Link className="nav-link bg-light py-1 px-2 mb-0 me-2" to="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
                                             <FontAwesomeIcon icon={faTwitter} />
                                         </Link>
@@ -236,9 +237,10 @@ const Feed = () => {
                                 <div className="card">
                                     <div className="card-header">
                                         <div className="d-flex align-items-center">
-                                            <Avatar className='me-2' />
-                                            <span className="h5 me-2">fauxrivererian</span>
+                                            <Avatar className='me-3' />
+                                            <span className="h5 mb-0 me-2">fauxrivererian</span>
                                             <MdVerified className='text-primary'/>
+                                            <span className='ms-2'>&#8226; 5h</span>
                                         </div>
                                     </div>
                                     <div className="card-body p-0">
@@ -315,7 +317,7 @@ const Feed = () => {
                     <div className="col-lg-3">
                         <div className="row g-4">
 
-                            <div className="col-sm-6 col-lg-12">
+                            <div className="col-12">
                                 <div className="card bg-transparent border-0" style={{'--bs-card-bg': 'transparent !important'}}>
 
                                     <div className="card-header bg-transparent px-0 d-flex align-items-center justify-content-between">
@@ -324,90 +326,168 @@ const Feed = () => {
                                     </div>
 
 
-                                    <div className="card-body px-0">
+                                    <div className="card-body p-0">
 
                                         <List
+                                            className="suggListUser"
                                             sx={{
                                                 width: '100%',
-                                                maxWidth: 360,
+                                                // maxWidth: 360,
                                                 bgcolor: 'transparent',
                                                 border: 'none',
                                                 borderColor: 'primary.main',
                                                 borderRadius: 1
                                             }}
                                             >
-                                            <ListItem className="px-0">
+                                            <ListItem className="px-0"
+                                                secondaryAction={
+                                                    <Button variant="text" edge="end" sx={{textTransform: 'capitalize'}}>Follow</Button>
+                                                }
+                                            >
                                                 <ListItemAvatar>
                                                     <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
-                                                <ListItemText primary="imkir" secondary="Follows you" />
+                                                {/* <ListItemText primary="imkir" secondary="Follows you" /> */}
+                                                <ListItemText
+                                                    primary={
+                                                        <Typography className="" color="var(--bs-light-text-emphasis)">
+                                                            imkir
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <Typography component="span" variant="body2" color="var(--bs-gray-300)">
+                                                            Follows you
+                                                        </Typography>
+                                                    }
+                                                />
                                             </ListItem>
-                                            {/* <Spacer variant="inset" component="li" space="12px"/> */}
-                                            <ListItem className="px-0">
-                                                <ListItemAvatar>
-                                                    <Avatar src={ imgFeed.userDefault } />
-                                                </ListItemAvatar>   
-                                                <ListItemText primary="organic__al" secondary="Followed by chirag_singla17" />
-                                            </ListItem>
-                                                {/* <Spacer component="li" sx={{marginLeft: '5%', marginRight: '5%'}} space="12px"/> */}
-                                            <ListItem className="px-0">
-                                                <ListItemAvatar>
-                                                    <Avatar src={ imgFeed.userDefault } />
-                                                </ListItemAvatar>
-                                                <ListItemText primary="im_gr" secondary="Followed by chirag_singla17" />
-                                            </ListItem>
-                                            <ListItem className="px-0">
-                                                <ListItemAvatar>
-                                                    <Avatar src={ imgFeed.userDefault } />
-                                                </ListItemAvatar>
-                                                <ListItemText primary="abh952" secondary="Follows you" />
-                                            </ListItem>
-                                            <ListItem className="px-0">
+                                            <ListItem className="px-0"
+                                                secondaryAction={
+                                                    <Button variant="text" edge="end" sx={{textTransform: 'capitalize'}}>Follow</Button>
+                                                }
+                                            >
                                                 <ListItemAvatar>
                                                     <Avatar src={ imgFeed.userDefault } />
                                                 </ListItemAvatar>
-                                                <ListItemText primary="sakbrl" secondary="Follows you" />
+                                                {/* <ListItemText primary="imkir" secondary="Follows you" /> */}
+                                                <ListItemText
+                                                    primary={
+                                                        <Typography className="" color="var(--bs-light-text-emphasis)">
+                                                            organic__al
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <Typography component="span" variant="body2" color="var(--bs-gray-300)">
+                                                            Followed by chirag_singla17
+                                                        </Typography>
+                                                    }
+                                                />
                                             </ListItem>
+                                            <ListItem className="px-0"
+                                                secondaryAction={
+                                                    <Button variant="text" edge="end" sx={{textTransform: 'capitalize'}}>Follow</Button>
+                                                }
+                                            >
+                                                <ListItemAvatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
+                                                </ListItemAvatar>
+                                                {/* <ListItemText primary="imkir" secondary="Follows you" /> */}
+                                                <ListItemText
+                                                    primary={
+                                                        <Typography className="" color="var(--bs-light-text-emphasis)">
+                                                            im_gr
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <Typography component="span" variant="body2" color="var(--bs-gray-300)">
+                                                            Followed by chirag_singla17
+                                                        </Typography>
+                                                    }
+                                                />
+                                            </ListItem>
+                                            <ListItem className="px-0"
+                                                secondaryAction={
+                                                    <Button variant="text" edge="end" sx={{textTransform: 'capitalize'}}>Follow</Button>
+                                                }
+                                            >
+                                                <ListItemAvatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
+                                                </ListItemAvatar>
+                                                {/* <ListItemText primary="imkir" secondary="Follows you" /> */}
+                                                <ListItemText
+                                                    primary={
+                                                        <Typography className="" color="var(--bs-light-text-emphasis)">
+                                                            abh952
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <Typography component="span" variant="body2" color="var(--bs-gray-300)">
+                                                            Follows you
+                                                        </Typography>
+                                                    }
+                                                />
+                                            </ListItem>
+                                            <ListItem className="px-0"
+                                                secondaryAction={
+                                                    <Button variant="text" edge="end" sx={{textTransform: 'capitalize'}}>Follow</Button>
+                                                }
+                                            >
+                                                <ListItemAvatar>
+                                                    <Avatar src={ imgFeed.userDefault } />
+                                                </ListItemAvatar>
+                                                {/* <ListItemText primary="imkir" secondary="Follows you" /> */}
+                                                <ListItemText
+                                                    primary={
+                                                        <Typography className="" color="var(--bs-light-text-emphasis)">
+                                                            sakbrl
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <Typography component="span" variant="body2" color="var(--bs-gray-300)">
+                                                            Follows you
+                                                        </Typography>
+                                                    }
+                                                />
+                                            </ListItem>
+
                                         </List>
-
-
                                     </div>
-
                                 </div>
                             </div>
 
                             
-
-                            <ul className="nav small mt-4 lh-1">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">About</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">Help</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">Press</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" target="_blank" to="#">API</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" target="_blank" to="#">Jobs</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">Privacy</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">Terms</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="#">Locations</Link>
-                                </li>
-                            </ul>
+                            <div className="col-12">
+                                <ul className="nav small mt-4 lh-1 footer-quick-link">
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">About</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">Help</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">Press</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" target="_blank" to="#">API</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" target="_blank" to="#">Jobs</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">Privacy</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">Terms</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">Locations</Link>
+                                    </li>
+                                </ul>
+                            </div>
                             
 
 
-                            <p className="small mt-1">©2023 <Link className="text-body" target="_blank" to="#"> ichat </Link>
+                            <p className="small mt-2">© 2023 <Link className="text-body" target="_blank" to="#"> iCHAT </Link>
                             </p>
 
                         </div>

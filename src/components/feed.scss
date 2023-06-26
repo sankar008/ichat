@@ -2040,4 +2040,49 @@ main {
       }
     }
   }
+  .swiper-button-prev, .swiper-button-next {
+    background: rgba(var(--bs-white-rgb), 1);
+    height: 2.5em;
+    width: 2.5em;
+    padding: 1rem;
+    border-radius: 50px
+  }
 }
+
+
+
+.suggListUser {
+  .MuiListItem-root {
+    .MuiListItemText-root {
+      .MuiTypography-body2 {
+        font-size: calc(100% - .2em);
+        max-width: 70%;
+        display: block;
+      }
+    }
+    .MuiListItemSecondaryAction-root {
+      right: 0;
+    }
+  }
+}
+
+
+.footer-quick-link li {
+  position: relative;
+  display: inherit;
+  a {
+    padding: 0;
+    font-size: calc(100% - 0.12em);
+    color: rgba(var(--bs-white-rgb), 0.5);
+  }
+  &:not(:first-child) {
+    margin-left: 0.18em;
+  }
+  &:not(:last-child):after {
+    content: "\2022";
+    margin-left: 0.18em;
+    display: inline-block;
+  }
+}
+
+
