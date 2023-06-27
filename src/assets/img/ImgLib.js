@@ -34,6 +34,13 @@ export const userOne = require('./users/user-1.jpg')
 export const userTwo = require('./users/user-2.jpg')
 export const userThree = require('./users/user-3.jpg')
 export const userFour = require('./users/user-4.jpg')
+export const usersImg = {
+    default: require('./users/user-common.jpg'),
+    u1: require('./users/user-1.jpg'),
+    u2: require('./users/user-2.jpg'),
+    u3: require('./users/user-3.jpg'),
+    u4: require('./users/user-4.jpg'),
+}
 export const postSlider = {
     img1: require('./post1.png'),
     img2: require('./post2.jpg'),
