@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
+
+import Sidebar from './particals/sudebar'
 import Story from './particals/story';
 import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
@@ -8,9 +10,9 @@ import { postSlider } from '../assets/img/ImgLib';
 
 import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 
-import { Zuck } from 'zuck.js';
-import 'zuck.js/css';
-import 'zuck.js/skins/snapgram';
+// import { Zuck } from 'zuck.js';
+// import 'zuck.js/css';
+// import 'zuck.js/skins/snapgram';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
 import 'swiper/scss';
@@ -18,11 +20,9 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 
 
-import { MdHomeFilled, MdOutlineExplore, MdMenu, MdVerified } from "react-icons/md"
-import { BiSearch, BiVideo } from "react-icons/bi"
-import { BsMessenger, BsHeart, BsEmojiSmile, BsChat, BsSend, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs"
-import { FiPlusSquare } from 'react-icons/fi'
-import { FaHeart, FaPlus, FaVideo } from 'react-icons/fa';
+import { MdVerified } from "react-icons/md"
+import { BiVideo } from "react-icons/bi"
+import { BsHeart, BsEmojiSmile, BsChat, BsSend, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
@@ -31,11 +31,13 @@ import SuggestionCard from './particals/SuggestionCard';
 
 
 const Feed = () => {
-    let [ feedList, setFeedList ] = useState(stories)
+    // let [ feedList, setFeedList ] = useState(stories)
+    let [ isFocusPost, setIsFocusPost ] = useState(false);
     useEffect(() => {
-        document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark')
-        autoResize()
-    }, [])
+        document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
+        autoResize();
+        // focusPost()
+    }, []);
     
     function autoResize() {
         document.querySelectorAll('[data-autoresize]').forEach(function (element) {
@@ -46,7 +48,25 @@ const Feed = () => {
 				event.target.style.height = event.target.scrollHeight + offset + 'px';
 			});
 		});
-    }
+    };
+    const focusPost = () => {
+        setIsFocusPost(!isFocusPost)
+        /* const isFocusPost = props.isFocusPost;
+        if( isFocusPost ) {
+            document.body.classList.add('readyPost')
+            // return (
+            //     <></>
+            // )
+        }
+        return */
+        document.body.classList.add('readyPost')
+        const elOverlay = document.createElement('div')
+        elOverlay.classList.add('post-overlay')
+        const getElBefore = document.querySelector('.vstack')
+        console.log(getElBefore)
+        getElBefore.insertBefore(elOverlay, null)
+        // elOverlayFull.insertBefore(getElBefore, null)
+    };
 
   return (
     <>
@@ -55,93 +75,17 @@ const Feed = () => {
                 <div className="row g-4">
                     <div className="col-lg-3">
                         <div className="d-flex align-items-center justify-content-center">
-                            <a href="/"><img className='img-fluid' src={ imgFeed.logoLight } alt="" /></a>
+                            <Link href="/"><img className='img-fluid' src={ imgFeed.logoLight } alt="" /></Link>
                         </div>
-
-                        <nav className="navbar navbar-expand-lg mx-0">
-                            <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasSideNavbar">
-
-                                <div className="offcanvas-header">
-                                    <button type="button" className="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas"
-                                        aria-label="Close">
-                                    </button>
-                                </div>
-
-
-                                <div className="offcanvas-body d-block px-2 px-lg-0">
-                                    <div className="card overflow-hidden bg-transparent border-0">
-
-                                        <div className="card-body navLeft">
-
-
-                                            <ul className="nav nav-link-secondary flex-column fw-bold gap-3">
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to=""> 
-                                                        <MdHomeFilled className="navIcon" size="1.6em" />
-                                                        <span>Home </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <BiSearch className="navIcon" size="1.6em" />
-                                                        <span>Search </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <MdOutlineExplore className="navIcon" size="1.6em" />
-                                                        <span>Explore </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="" >
-                                                        <BsMessenger className="navIcon" size="1.45em" />
-                                                        <span>Messages </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <BsHeart className="navIcon" size="1.4em" />
-                                                        <span>Notifications </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <FiPlusSquare className="navIcon" size="1.4em" />
-                                                        <span>Create </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <Avatar className="navIcon" alt="" src={ imgFeed.userDefault } sx={{ width: 22, height: 22 }} />
-                                                        <span>Profile </span>
-                                                    </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link" to="">
-                                                        <MdMenu className="navIcon" size="1.4em" />
-                                                        <span>More </span>
-                                                    </Link>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
+                        <Sidebar />
                     </div>
-
-
-
                     <div className="col-md-8 col-lg-6 vstack gap-4">
                         <Story />
                         
 
 
 
-                        <div className="card card-body mb-5">
+                        <div className="card card-body card-post mb-5">
                             <div className="d-flex mb-3">
 
                                 <div className="avatar avatar-xs me-2">
@@ -149,7 +93,7 @@ const Feed = () => {
                                 </div>
 
                                 <form className="w-100">
-                                    <textarea className="form-control pe-4 border-0" rows="2" onInput={autoResize()} data-autoresize="" placeholder="Say something....."></textarea>
+                                    <textarea className="form-control pe-4 border-0" rows="2" onInput={autoResize()} onClick={ focusPost } data-autoresize="" placeholder="Say something....."></textarea>
                                 </form>
                             </div>
 

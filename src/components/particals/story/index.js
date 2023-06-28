@@ -5,7 +5,7 @@ import { usersImg } from '../../../assets/img/ImgLib'
 import { List } from '@mui/material'
 import { FaPlus } from 'react-icons/fa'
 
-const index = () => {
+const Index = () => {
   return (
     <>
     <div className="d-flex">
@@ -55,4 +55,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index

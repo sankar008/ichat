@@ -2034,7 +2034,7 @@ main {
     .feed-media-wrapper { 
       img {
         width: 100%;
-        height: 53rem;
+        // height: 53rem;
         object-fit: contain;
         background: #000;
       }
@@ -2085,6 +2085,26 @@ main {
     margin-left: 0.18em;
     display: inline-block;
   }
+}
+
+.readyPost {
+  overflow: hidden;
+  height: 100vh;
+}
+.post-overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #000000a5;
+  backdrop-filter: blur(1.1px);
+  // user-select: none;
+  // pointer-events: none;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+.vstack .card-post {
+  z-index: 3
 }
 
 
