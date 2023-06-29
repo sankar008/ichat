@@ -13,6 +13,8 @@ import LoginParent from "../parents/LoginParent";
 import Profile from "../Profile";
 import Feed from "../Feed";
 import Page404 from "../Page404";
+import ParentsForgotPassword from "../parents/ForgotPassword.js"
+import KidsForgotPassword from "../kids/ForgotPassword.js"
 
 const BasicRoutes = () => {
   return (
@@ -22,27 +24,17 @@ const BasicRoutes = () => {
           <Route exact path="/about" element={<Aboutus />} />
           <Route exact path="/account-type" element={<AccountType />} />
           <Route exact path="/parent/signup" element={<SignupParent />} />
-          <Route exact path="/child/signup" element={<SignupChild />} />
           <Route exact path="/parent/login" element={<LoginParent />} />
-          <Route exact path="/child/login" element={<LoginChild />} />
+          <Route exact path="/parent/forgot-password" element={<ParentsForgotPassword />} />
+
+          <Route exact path="/kids/signup" element={<SignupChild />} />
+          <Route exact path="/kids/login" element={<LoginChild />} />
+          <Route exact path="/kids/forgot-password" element={<KidsForgotPassword />} />
+
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/feed" element={<Feed />} />
           <Route path="*" element={<Page404 />} />
-        </Routes>
-      {/* <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesS />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/about-us" element={<About />} />
-        <Route path="/how-it-work" element={<HowItWork/> } />
-        <Route path="/benifits" element={<Benifits/> } />
-        <Route path="/review" element={<Review/> } />
-        <Route path="/faq" element={<Faq/> } />
-      </Routes>
-      <Footer /> */}
+        </Routes>     
     </Router>
   );
 };

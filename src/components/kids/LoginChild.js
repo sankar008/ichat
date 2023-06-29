@@ -91,13 +91,13 @@ const LoginChild = () => {
                     <div className="panWrapper text-light form-theme">
                         <span className="display-6 h5 mb-4 d-block">Sign in</span>
                         <span className="d-block mb-2">Don’t have an account?</span>
-                        <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/child/signup">Register here!</Link></span>
+                        <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/kids/signup">Register here!</Link></span>
 
                         {
                           isField === 0?(
                             <>
                               <div className="form-floating my-5">
-                                <input type="email" className="form-control" id="emailId" name="emailId" placeholder="Enter your registered email id" onChange={handalerChanges}/>
+                                <input type="email" className="form-control" id="emailId" name="emailId" value={formData.emailId?formData.emailId:''} placeholder="Enter your registered email id" onChange={handalerChanges}/>
                                 <label htmlFor="emailId">Email ID</label>
                               </div>
                             </>
@@ -111,7 +111,7 @@ const LoginChild = () => {
                                     <input type="password" className="form-control" id="password" name="password" placeholder="Enter password" onChange={handalerChanges}/>
                                     <label htmlFor="password">Password</label>
                                 </div>
-                              <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to="">Forgot password</Link></div>
+                              <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to="/kids/forgot-password">Forgot password</Link></div>
                              </>
                         ):``
                         }

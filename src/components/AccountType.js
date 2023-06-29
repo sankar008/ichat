@@ -14,8 +14,6 @@ import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper
 
 import 'swiper/css';
 import "swiper/css/effect-fade";
-/* import 'swiper/swiper.scss';
-import 'swiper/components/effect-fade/effect-fade.scss'; */
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
@@ -101,7 +99,7 @@ const AccountType = () => {
                                 </Link>
                             </li>
                             <li className='type-item'>
-                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/child/login">
+                                <Link className='d-flex align-items-center link-light link-underline-opacity-0' to="/kids/login">
                                     <img className='img-fluid' src={ imgPath.logoChild } alt="" />
                                     <div className="cont">
                                         <h6 className="title">Kids</h6>

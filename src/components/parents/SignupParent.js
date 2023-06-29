@@ -133,7 +133,7 @@ const SignupParent = () => {
                 <div className="col-12 col-lg-7 panLeft" style={{'--bg-url': 'url('+loginImg.signBg+')'}}></div>
                 <div className="col-12 col-lg-5 panRight">
                     <div className="panWrapper text-light form-theme">
-                        <span className="display-6 h5 mb-4 d-block">Sign in</span>
+                        <span className="display-6 h5 mb-4 d-block">Create a new account</span>
                         <span className="d-block mb-2">If you already have an account register</span>
                         <span className="d-block">You can <Link className='link-theme link-danger link-underline-opacity-0' to="/parent/login">Login here !</Link></span>
                         {

@@ -115,7 +115,7 @@ const LoginParent = () => {
                                     <input type="password" className="form-control" id="password" name="password" placeholder="Enter password" onChange={handalerChanges}/>
                                     <label htmlFor="password">Password</label>
                                 </div>
-                                <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to="">Forgot password</Link></div>
+                                <div className="text-end mt-n4 mb-4"><Link className="link-light link-underline-opacity-0" to="/parent/forgot-password">Forgot password</Link></div>
                             </>
                         ):``
                         }
