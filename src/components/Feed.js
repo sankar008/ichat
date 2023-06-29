@@ -30,6 +30,16 @@ import SuggestionCard from './particals/SuggestionCard';
 
 
 
+
+/* ====*** Design Support ***==== *//*
+
+https://mui.com/material-ui/react-skeleton/#animations
+https://mui.com/material-ui/react-progress/
+
+*//* ====*** Design Support ***==== */
+
+
+
 const Feed = () => {
     // let [ feedList, setFeedList ] = useState(stories)
     let [ isFocusPost, setIsFocusPost ] = useState(false);
