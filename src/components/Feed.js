@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Sidebar from './particals/sudebar'
 import Story from './particals/story';
 import './feed.scss'
 import * as imgFeed from '../assets/img/ImgLib'
 import { postSlider } from '../assets/img/ImgLib';
+import AccountType from "../components/AccountType";
 
 import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 
@@ -41,9 +42,11 @@ https://mui.com/material-ui/react-progress/
 
 
 const Feed = () => {
+  
     // let [ feedList, setFeedList ] = useState(stories)
     let [ isFocusPost, setIsFocusPost ] = useState(false);
     useEffect(() => {
+
         document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
         autoResize();
         // focusPost()
@@ -79,6 +82,7 @@ const Feed = () => {
     };
 
   return (
+    JSON.parse(localStorage.getItem("isLoginCheck"))?
     <>
         <main className='py-5'>
             <div className="container">
@@ -400,7 +404,7 @@ const Feed = () => {
 
 
         </main>
-    </>
+    </>:<AccountType/>
   )
 }
 

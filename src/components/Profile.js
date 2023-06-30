@@ -11,8 +11,6 @@ import { faLayerGroup, faPen, faSearch, faTrash } from '@fortawesome/free-solid-
 import { FaPlus, FaPaperPlane } from 'react-icons/fa'
 
 
-
-
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
@@ -22,6 +20,7 @@ import { Box, Card, IconButton, ImageListItemBar, Modal, Typography } from '@mui
 import { useSpring, animated } from '@react-spring/web';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
+import AccountType from './AccountType.js';
 
 
 function srcset(image, size, rows = 1, cols = 1) {
@@ -98,6 +97,7 @@ export default function Profile() {
   const handleClose = () => setOpen(false);
 
   return (
+    JSON.parse(localStorage.getItem("isLoginCheck"))?
     <>
       <section className="banner" style={{'--imgBan': 'url("' + imgProfile.banProfile + '")'}}>
         <h1 className="display-6 opacity-0">Mandy Richardson - Profile iCHAT</h1>
@@ -309,7 +309,7 @@ export default function Profile() {
           </div>
         </div>
       </section>
-    </>
+    </>:<AccountType/>
   )
 }
 
