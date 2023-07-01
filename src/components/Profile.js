@@ -234,16 +234,18 @@ export default function Profile() {
                                   </IconButton>
                                   <IconButton
                                     sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`}
+                                    aria-label={`star ${item.title}`} 
+                                    onClick={handleOpen}
                                   >
-                                    <FontAwesomeIcon icon={faLayerGroup} onClick={handleOpen} height="20px" width="20px" />
+                                    <FontAwesomeIcon icon={faLayerGroup} height="20px" width="20px" />
                                   </IconButton>
                                   
                                   <IconButton
                                     sx={{ color: 'white' }}
                                     aria-label={`star ${item.title}`}
+                                    onClick={handleOpen}
                                   >
-                                    <FontAwesomeIcon icon={faPen} onClick={handleOpen} height="20px" width="20px" />
+                                    <FontAwesomeIcon icon={faPen}  height="20px" width="20px" />
                                   </IconButton>
                                   
                                   

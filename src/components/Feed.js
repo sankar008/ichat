@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Sidebar from './particals/sudebar'
@@ -9,7 +8,12 @@ import * as imgFeed from '../assets/img/ImgLib'
 import { postSlider } from '../assets/img/ImgLib';
 import AccountType from "../components/AccountType";
 
-import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import { Avatar, Button, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+// import CommentIcon from '@mui/icons-material/Comment';
 
 // import { Zuck } from 'zuck.js';
 // import 'zuck.js/css';
@@ -28,6 +32,7 @@ import { BsHeart, BsEmojiSmile, BsChat, BsSend, BsHeartFill, BsBookmark, BsBookm
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import SuggestionCard from './particals/SuggestionCard';
+import { FaTimes } from 'react-icons/fa';
 
 
 
@@ -46,10 +51,8 @@ const Feed = () => {
     // let [ feedList, setFeedList ] = useState(stories)
     let [ isFocusPost, setIsFocusPost ] = useState(false);
     useEffect(() => {
-
         document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
         autoResize();
-        // focusPost()
     }, []);
     
     function autoResize() {
@@ -63,24 +66,45 @@ const Feed = () => {
 		});
     };
     const focusPost = () => {
-        setIsFocusPost(!isFocusPost)
-        /* const isFocusPost = props.isFocusPost;
-        if( isFocusPost ) {
-            document.body.classList.add('readyPost')
-            // return (
-            //     <></>
-            // )
+        setIsFocusPost(true)
+    };
+    useEffect(() => {
+        const skipPost = (event) => {
+            if (event.key === 'Escape') {
+                setIsFocusPost(false);
+                document.getElementById('postField').value = '';
+                document.getElementById('postField').blur();
+            }
+          };
+        document.body.classList.toggle('readyPost', isFocusPost);
+        document.addEventListener('keydown', skipPost);
+
+        return () => {
+            document.body.classList.remove('readyPost');
+            document.removeEventListener('keydown', skipPost);
+        };
+    }, [isFocusPost]);
+
+
+
+
+    const [checked, setChecked] = React.useState([0]);
+
+    const handleToggle = (value) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+        newChecked.push(value);
+        } else {
+        newChecked.splice(currentIndex, 1);
         }
-        return */
-        document.body.classList.add('readyPost')
-        const elOverlay = document.createElement('div')
-        elOverlay.classList.add('post-overlay')
-        const getElBefore = document.querySelector('.vstack')
-        console.log(getElBefore)
-        getElBefore.insertBefore(elOverlay, null)
-        // elOverlayFull.insertBefore(getElBefore, null)
+
+        setChecked(newChecked);
     };
 
+    
+    
   return (
     JSON.parse(localStorage.getItem("isLoginCheck"))?
     <>
@@ -93,13 +117,27 @@ const Feed = () => {
                         </div>
                         <Sidebar />
                     </div>
+                    { isFocusPost ? (
+                        <div className="post-overlay"></div>
+                    ):('')
+                    }
                     <div className="col-md-8 col-lg-6 vstack gap-4">
                         <Story />
                         
 
 
-
-                        <div className="card card-body card-post mb-5">
+                        <div className="card card-post mb-5">
+                            <div className="card-body">
+                            { isFocusPost ?
+                                <div className="position-absolute" style={{right: '-15px', top: '-15px'}}>
+                                    <Button style={{minWidth: 'auto'}} onClick={() => { setIsFocusPost(false) }} sx={{
+                                        backgroundColor: '#141519de',
+                                        border: '1px solid var(--bs-light)',
+                                        color: 'var(--bs-gray-400)',
+                                    }}><FaTimes /></Button>
+                                </div>
+                            :
+                            '' }
                             <div className="d-flex mb-3">
 
                                 <div className="avatar avatar-xs me-2">
@@ -107,10 +145,9 @@ const Feed = () => {
                                 </div>
 
                                 <form className="w-100">
-                                    <textarea className="form-control pe-4 border-0" rows="2" onInput={autoResize()} onClick={ focusPost } data-autoresize="" placeholder="Say something....."></textarea>
+                                    <textarea id="postField" className="form-control pe-4 border-0" rows="2" onInput={autoResize()} onFocus={ focusPost } data-autoresize="" placeholder="Say something....."></textarea>
                                 </form>
                             </div>
-
                             <ul className="nav nav-pills nav-stack small fw-normal">
                                 <li className="nav-item me-2">
                                     <a className="nav-link rounded-pill bg-light text-white py-1 px-4 mb-0" href="#!">
@@ -135,6 +172,47 @@ const Feed = () => {
                                     </div>
                                 </li>
                             </ul>
+                            { isFocusPost ? (
+                                <>
+                                <Divider light={true} variant="fullWidth" sx={{ margin: '1rem 0', borderColor: '#cccccc52' }} />
+                                <List sx={{ width: '100%', paddingTop: '1rem', color: '#f3f3f3' }}>
+                                    {[0, 1, 2, 3].map((value) => {
+                                        const labelId = `checkbox-list-label-${value}`;
+
+                                        return (
+                                        <ListItem
+                                            key={value}
+                                            secondaryAction={
+                                            <IconButton edge="end" aria-label="comments">
+                                                <BsChat />
+                                            </IconButton>
+                                            }
+                                            disablePadding
+                                        >
+                                            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                                            <ListItemIcon>
+                                                <Checkbox
+                                                edge="start"
+                                                checked={checked.indexOf(value) !== -1}
+                                                tabIndex={-1}
+                                                disableRipple
+                                                inputProps={{ 'aria-labelledby': labelId }}
+                                                />
+                                            </ListItemIcon>
+                                            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                        );
+                                    })}
+                                </List>
+                                </>
+                            ) : ""}
+                            </div>
+                            { isFocusPost ? (
+                                <div className="card-footer">
+                                    <Button>Publish</Button>
+                                </div>
+                            ) : ""}
                         </div>
 
                         <div className="row">
