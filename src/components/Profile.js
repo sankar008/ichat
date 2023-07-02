@@ -23,6 +23,9 @@ import Backdrop from '@mui/material/Backdrop';
 import AccountType from './AccountType.js';
 
 
+import Album from './particals/album'
+
+
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -92,9 +95,9 @@ const style = {
 
 export default function Profile() {
 
-  const [open, setOpen] = React.useState(false);
+  /* const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(false); */
 
   const [groupopen, setGroupopen] = React.useState(false);
   const handleGroupopen = () => setGroupopen(true);
@@ -109,13 +112,13 @@ export default function Profile() {
   
   function autoResize() {
       document.querySelectorAll('[data-autoresize]').forEach(function (element) {
-    var offset = element.offsetHeight - element.clientHeight;
-          console.log(offset)
-    element.addEventListener('input', function (event) {
-      event.target.style.height = 'auto';
-      event.target.style.height = event.target.scrollHeight + offset + 'px';
+      var offset = element.offsetHeight - element.clientHeight;
+            console.log(offset)
+      element.addEventListener('input', function (event) {
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.scrollHeight + offset + 'px';
+      });
     });
-  });
   };
   const focusPost = () => {
       setIsFocusPost(true)
@@ -203,7 +206,7 @@ export default function Profile() {
           <div className="row">
             <div className="col-12">
 
-            <Modal
+            {/* <Modal
               aria-labelledby="spring-modal-title"
               aria-describedby="spring-modal-description"
               open={open}
@@ -249,7 +252,7 @@ export default function Profile() {
                     </form>
                 </Box>
               </Fade>
-            </Modal>
+            </Modal> */}
 
 
 
@@ -261,77 +264,8 @@ export default function Profile() {
                   fill
                 >
                   <Tab eventKey="photos" title="Photos">
-                      <ImageList
-                        sx={{}}
-                        variant="quilted"
-                        cols={6}
-                      >
-                        <ImageListItem cols={1} rows={1}>
-                          <Link>
-                            <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
-                              <FaPlus size="60"/>
-                            </Card>
-                          </Link>
-                        </ImageListItem>
-                        {itemData.map((item) => (
-                          <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                            <img
-                              {...srcset(item.img, 121, item.rows, item.cols)}
-                              alt={item.title}
-                              loading="lazy"
-                            />
-                            <ImageListItemBar
-                                sx={{
-                                  background:
-                                    'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                                    'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-                                  flexDirection: 'row-reverse',
-                                }}
-                                // title={}
-                                position="top"
-                                actionIcon={
-                                  <>
-                                  <IconButton
-                                    className="text-end"
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`}
-                                  >
-                                    <FontAwesomeIcon icon={faTrashAlt} height="20px" width="20px" />
-                                  </IconButton>
-                                  <IconButton
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`} 
-                                    onClick={handleOpen}
-                                  >
-                                    <FontAwesomeIcon icon={faLayerGroup} height="20px" width="20px" />
-                                  </IconButton>
-                                  
-                                  <IconButton
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`}
-                                    onClick={handleOpen}
-                                  >
-                                    <FontAwesomeIcon icon={faPen}  height="20px" width="20px" />
-                                  </IconButton>
-                                  
-                                  
-                                  </>
-                                }
-                                actionPosition="left"
-                              />
-                              <Typography sx={{ 
-                                position: 'absolute', 
-                                top: '50%', 
-                                left: '50%', 
-                                transform: 'translate(-50%, -50%)', 
-                                padding: '.1em .5em',
-                                background: '#000000a5',
-                                borderRadius: '5px',
-                                textAlign: 'center' ,
-                              }}>{item.title}</Typography>
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
+                      <Album />
+                      
                   </Tab>
                   
                   <Tab eventKey="friends" title="Friends">
@@ -355,76 +289,7 @@ export default function Profile() {
                   </Tab>
 
                   <Tab eventKey="clubs" title="Clubs">
-                      <ImageList
-                        sx={{}}
-                        variant="quilted"
-                        cols={6}
-                      >
-                        <ImageListItem cols={1} rows={1}>
-                          <Link>
-                            <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
-                              <FaPlus size="60"/>
-                            </Card>
-                          </Link>
-                        </ImageListItem>
-                        {itemData.map((item) => (
-                          <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                            <img
-                              {...srcset(item.img, 121, item.rows, item.cols)}
-                              alt={item.title}
-                              loading="lazy"
-                            />
-                            <ImageListItemBar
-                                sx={{
-                                  background:
-                                    'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                                    'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-                                  flexDirection: 'row-reverse',
-                                }}
-                                // title={}
-                                position="top"
-                                actionIcon={
-                                  <>
-                                  <IconButton
-                                    className="text-end"
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`}
-                                  >
-                                    <FontAwesomeIcon icon={faTrashAlt} height="20px" width="20px" />
-                                  </IconButton>
-                                  <IconButton
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`} 
-                                    onClick={handleOpen}
-                                  >
-                                    <FontAwesomeIcon icon={faLayerGroup} height="20px" width="20px" />
-                                  </IconButton>
-                                  
-                                  <IconButton
-                                    sx={{ color: 'white' }}
-                                    aria-label={`star ${item.title}`}
-                                    onClick={handleOpen}
-                                  >
-                                    <FontAwesomeIcon icon={faPen}  height="20px" width="20px" />
-                                  </IconButton>                                 
-                                  
-                                  </>
-                                }
-                                actionPosition="left"
-                              />
-                              <Typography sx={{ 
-                                position: 'absolute', 
-                                top: '50%', 
-                                left: '50%', 
-                                transform: 'translate(-50%, -50%)', 
-                                padding: '.1em .5em',
-                                background: '#000000a5',
-                                borderRadius: '5px',
-                                textAlign: 'center' ,
-                              }}>{item.title}</Typography>
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
+                      <Typography>Here will be joined members</Typography>
                   </Tab>
               </Tabs>
 
