@@ -27,6 +27,8 @@ import AccountType from './AccountType.js';
 
 
 import Album from './particals/album'
+import { IoIosImages } from 'react-icons/io';
+import { IoMdImages } from 'react-icons/io';
 
 
 function srcset(image, size, rows = 1, cols = 1) {
@@ -205,7 +207,7 @@ export default function Profile() {
                   </ul>
                   { focusedInputAbout ? (
                     <ButtonGroup spacing="0.5rem" aria-label="spacing button group">
-                      <IconButton sx={{ color: 'white' }}><IoIosCloudOutline /></IconButton>
+                      <IconButton sx={{ color: 'white' }}><IoMdImages /></IconButton>
                       <IconButton sx={{ color: 'white' }}><PiPaperPlaneRightFill /></IconButton>
                     </ButtonGroup>
                   )
