@@ -1,0 +1,23 @@
+.active-overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #0000009e;
+    backdrop-filter: blur(1.1px);
+    z-index: 2;
+}
+.readyPost .share-something {
+    position: relative;
+    z-index: 3;
+}
+
+.userAvator .MuiBadge-badge {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    .MuiIconButton-root {
+        border: 5px solid #000;
+    }
+}

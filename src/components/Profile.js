@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import * as imgProfile from '../assets/img/ImgLib.js';
+import './profile.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faEye, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 // import {  } from '@fortawesome/free-solid-svg-icons'
 import { faLayerGroup, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FaPlus, FaPaperPlane } from 'react-icons/fa'
+import { FaPlus, FaPaperPlane, FaPen } from 'react-icons/fa'
+import { PiPaperPlaneRightFill, PiX, PiXBold } from 'react-icons/pi'
+import { IoImages, IoIosCloudOutline } from 'react-icons/io'
 
 
 import Tab from 'react-bootstrap/Tab';
@@ -16,7 +19,7 @@ import Tabs from 'react-bootstrap/Tabs';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Box, Card, IconButton, ImageListItemBar, Modal, Typography } from '@mui/material';
+import { Avatar, Badge, Box, Button, ButtonGroup, Card, IconButton, ImageListItemBar, Modal, Typography } from '@mui/material';
 import { useSpring, animated } from '@react-spring/web';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
@@ -99,46 +102,29 @@ export default function Profile() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false); */
 
+  let [ focusedInputAbout, setFocusedInputAbout ] = useState(false);
+
   const [groupopen, setGroupopen] = React.useState(false);
   const handleGroupopen = () => setGroupopen(true);
   const handleGroupclose = () => setGroupopen(false);
 
-
-  let [ isFocusPost, setIsFocusPost ] = useState(false);
-  useEffect(() => {
-      document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
-      autoResize();
-  }, []);
   
-  function autoResize() {
-      document.querySelectorAll('[data-autoresize]').forEach(function (element) {
-      var offset = element.offsetHeight - element.clientHeight;
-            console.log(offset)
-      element.addEventListener('input', function (event) {
-        event.target.style.height = 'auto';
-        event.target.style.height = event.target.scrollHeight + offset + 'px';
-      });
-    });
-  };
-  const focusPost = () => {
-      setIsFocusPost(true)
-  };
   useEffect(() => {
-      const skipPost = (event) => {
-          if (event.key === 'Escape') {
-              setIsFocusPost(false);
-              document.getElementById('postField').value = '';
-              document.getElementById('postField').blur();
-          }
-        };
-      document.body.classList.toggle('readyPost', isFocusPost);
-      document.addEventListener('keydown', skipPost);
+    const skipPost = (event) => {
+      if (event.key === 'Escape') {
+          setFocusedInputAbout(false);
+          document.getElementById('postField').value = '';
+          document.getElementById('postField').blur();
+      }
+    };
+    document.body.classList.toggle('readyPost', focusedInputAbout);
+    document.addEventListener('keydown', skipPost);
 
-      return () => {
-          document.body.classList.remove('readyPost');
-          document.removeEventListener('keydown', skipPost);
-      };
-  }, [isFocusPost]);
+    return () => {
+        document.body.classList.remove('readyPost');
+        document.removeEventListener('keydown', skipPost);
+    };
+  }, [focusedInputAbout]);
 
 
 
@@ -154,9 +140,21 @@ export default function Profile() {
           <div className="row">
             <div className='dtl-profile mb-md-4'>
               <div className="imgUser-wrapper">
-                <div className="userImg">
-                  <img className="img-fluid" src={ imgProfile.imgProfileU } alt={`Mandy Richardson`} />
-                </div>
+                <Badge
+                    className="userAvator"
+                    overlap="circular"
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    badgeContent={
+                      <IconButton sx={{ background: '#f3f3f3' }}><FaPen /></IconButton>
+                    }
+                  >
+                      <Avatar src={ imgProfile.imgProfileU } alt={`Mandy Richardson`} sx={{
+                        width: '21.75rem', 
+                        height: '21.75rem', 
+                        borderRadius: 5, 
+                        }} 
+                      />
+                </Badge>
               </div>
               <div className="user-holder">
                 <h1 className="userName">{`Mandy Richardson`}</h1>
@@ -170,6 +168,9 @@ export default function Profile() {
                 <h4 className="display-6">This is your profile</h4>
             </div> */}
           </div>
+          { focusedInputAbout? (
+            <div className="active-overlay"></div>
+          ):"" }
           <div className="row">
             <div className="col-md-7">
               <h5 className='titleAbout'>About Me</h5>
@@ -178,11 +179,20 @@ export default function Profile() {
 
               <div className="share-something">
                 <div className="editor-top">
+                { focusedInputAbout ?
+                      <div className="position-absolute" style={{right: '5px', top: '5px'}}>
+                          <Button style={{minWidth: 'auto'}} onClick={() => { setFocusedInputAbout(false) }} sx={{
+                            borderRadius: '50px',
+                              color: 'var(--bs-gray-400)',
+                          }}><PiXBold /></Button>
+                      </div>
+                  :
+                  '' }
                   <img className="userIcon img-fluid" src={ imgProfile.imgProfileU } alt="" />
-                  <textarea className='form-control' name="" id="" placeholder='Say something.....'></textarea>
+                  <textarea className='form-control' name="" id="postField" placeholder='Say something.....' onFocus={() => { setFocusedInputAbout(true) }}></textarea>
                 </div>
                 <div className="share-footer">
-                  <ul className="list-inline mb-0">
+                  <ul className="list-inline mb-2">
                     <li className="list-inline-item">
                       <small>Share to</small>
                     </li>
@@ -193,7 +203,13 @@ export default function Profile() {
                       <Link className='link-theme link-light link-underline-opacity-0'><FontAwesomeIcon icon={faInstagram} /></Link>
                     </li>
                   </ul>
-                  <IconButton sx={{ color: 'white' }}><FaPaperPlane /></IconButton>
+                  { focusedInputAbout ? (
+                    <ButtonGroup spacing="0.5rem" aria-label="spacing button group">
+                      <IconButton sx={{ color: 'white' }}><IoIosCloudOutline /></IconButton>
+                      <IconButton sx={{ color: 'white' }}><PiPaperPlaneRightFill /></IconButton>
+                    </ButtonGroup>
+                  )
+                  :""}
                 </div>
               </div>
             </div>
