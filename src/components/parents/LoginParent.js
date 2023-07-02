@@ -57,6 +57,7 @@ const LoginParent = () => {
 
         const response = await axios.post(url, data);
         if(response.data.success === 1){
+            console.log(response.data);
             localStorage.setItem("isLoginCheck", true);
             localStorage.setItem("__fulName", response.data.data.full_name);
             localStorage.setItem("__userId", response.data.data.userCode);

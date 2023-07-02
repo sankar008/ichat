@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import * as imgProfile from '../assets/img/ImgLib.js';
@@ -96,7 +96,51 @@ export default function Profile() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [groupopen, setGroupopen] = React.useState(false);
+  const handleGroupopen = () => setGroupopen(true);
+  const handleGroupclose = () => setGroupopen(false);
+
+
+  let [ isFocusPost, setIsFocusPost ] = useState(false);
+  useEffect(() => {
+      document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
+      autoResize();
+  }, []);
+  
+  function autoResize() {
+      document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+    var offset = element.offsetHeight - element.clientHeight;
+          console.log(offset)
+    element.addEventListener('input', function (event) {
+      event.target.style.height = 'auto';
+      event.target.style.height = event.target.scrollHeight + offset + 'px';
+    });
+  });
+  };
+  const focusPost = () => {
+      setIsFocusPost(true)
+  };
+  useEffect(() => {
+      const skipPost = (event) => {
+          if (event.key === 'Escape') {
+              setIsFocusPost(false);
+              document.getElementById('postField').value = '';
+              document.getElementById('postField').blur();
+          }
+        };
+      document.body.classList.toggle('readyPost', isFocusPost);
+      document.addEventListener('keydown', skipPost);
+
+      return () => {
+          document.body.classList.remove('readyPost');
+          document.removeEventListener('keydown', skipPost);
+      };
+  }, [isFocusPost]);
+
+
+
   return (
+    
     JSON.parse(localStorage.getItem("isLoginCheck"))?
     <>
       <section className="banner" style={{'--imgBan': 'url("' + imgProfile.banProfile + '")'}}>
@@ -185,6 +229,29 @@ export default function Profile() {
             </Modal>
 
 
+            <Modal
+              aria-labelledby="spring-modal-title"
+              aria-describedby="spring-modal-description"
+              open={open}
+              onClose={handleGroupclose}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                  TransitionComponent: Fade,
+                },
+              }}
+            >
+              <Fade in={handleGroupopen}>
+                <Box sx={style}>
+                     <form className="w-100">
+                      <textarea id="postField" className="form-control pe-4 border-0" rows="2" onInput={autoResize()} onFocus={ focusPost } data-autoresize="" placeholder="Say something....."></textarea>
+                    </form>
+                </Box>
+              </Fade>
+            </Modal>
+
+
 
               <Tabs
                   defaultActiveKey="photos"
@@ -198,9 +265,8 @@ export default function Profile() {
                         sx={{}}
                         variant="quilted"
                         cols={6}
-                        //rowHeight={121}
                       >
-                        <ImageListItem cols={2 || 1} rows={2 || 1}>
+                        <ImageListItem cols={1} rows={1}>
                           <Link>
                             <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
                               <FaPlus size="60"/>
@@ -275,6 +341,7 @@ export default function Profile() {
                         cols={6}
                         //rowHeight={121}
                       >
+                        
                         {itemData.map((item) => (
                           <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
                             <img
@@ -292,8 +359,14 @@ export default function Profile() {
                         sx={{}}
                         variant="quilted"
                         cols={6}
-                        //rowHeight={121}
                       >
+                        <ImageListItem cols={1} rows={1}>
+                          <Link>
+                            <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
+                              <FaPlus size="60"/>
+                            </Card>
+                          </Link>
+                        </ImageListItem>
                         {itemData.map((item) => (
                           <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
                             <img
@@ -301,6 +374,54 @@ export default function Profile() {
                               alt={item.title}
                               loading="lazy"
                             />
+                            <ImageListItemBar
+                                sx={{
+                                  background:
+                                    'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+                                    'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+                                  flexDirection: 'row-reverse',
+                                }}
+                                // title={}
+                                position="top"
+                                actionIcon={
+                                  <>
+                                  <IconButton
+                                    className="text-end"
+                                    sx={{ color: 'white' }}
+                                    aria-label={`star ${item.title}`}
+                                  >
+                                    <FontAwesomeIcon icon={faTrashAlt} height="20px" width="20px" />
+                                  </IconButton>
+                                  <IconButton
+                                    sx={{ color: 'white' }}
+                                    aria-label={`star ${item.title}`} 
+                                    onClick={handleOpen}
+                                  >
+                                    <FontAwesomeIcon icon={faLayerGroup} height="20px" width="20px" />
+                                  </IconButton>
+                                  
+                                  <IconButton
+                                    sx={{ color: 'white' }}
+                                    aria-label={`star ${item.title}`}
+                                    onClick={handleOpen}
+                                  >
+                                    <FontAwesomeIcon icon={faPen}  height="20px" width="20px" />
+                                  </IconButton>                                 
+                                  
+                                  </>
+                                }
+                                actionPosition="left"
+                              />
+                              <Typography sx={{ 
+                                position: 'absolute', 
+                                top: '50%', 
+                                left: '50%', 
+                                transform: 'translate(-50%, -50%)', 
+                                padding: '.1em .5em',
+                                background: '#000000a5',
+                                borderRadius: '5px',
+                                textAlign: 'center' ,
+                              }}>{item.title}</Typography>
                           </ImageListItem>
                         ))}
                       </ImageList>
@@ -321,59 +442,7 @@ const itemData = [
   {
     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
     title: 'Breakfast',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Burger',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-    title: 'Camera',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Coffee',
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-    title: 'Hats',
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-    title: 'Honey',
-    author: '@arwinneil',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Basketball',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-    title: 'Fern',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Mushrooms',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Sea star',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Bike',
-    cols: 2,
-  },
+    rows: 1,
+    cols: 1,
+  }
 ];

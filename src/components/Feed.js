@@ -13,11 +13,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-// import CommentIcon from '@mui/icons-material/Comment';
-
-// import { Zuck } from 'zuck.js';
-// import 'zuck.js/css';
-// import 'zuck.js/skins/snapgram';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper';
 import 'swiper/scss';
