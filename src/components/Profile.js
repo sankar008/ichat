@@ -106,9 +106,6 @@ export default function Profile() {
 
   let [ focusedInputAbout, setFocusedInputAbout ] = useState(false);
 
-  const [groupopen, setGroupopen] = React.useState(false);
-  const handleGroupopen = () => setGroupopen(true);
-  const handleGroupclose = () => setGroupopen(false);
 
   
   useEffect(() => {
@@ -222,57 +219,7 @@ export default function Profile() {
 
         <div className="container">
           <div className="row">
-            <div className="col-12">
-
-            {/* <Modal
-              aria-labelledby="spring-modal-title"
-              aria-describedby="spring-modal-description"
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              slots={{ backdrop: Backdrop }}
-              slotProps={{
-                backdrop: {
-                  TransitionComponent: Fade,
-                },
-              }}
-            >
-              <Fade in={open}>
-                <Box sx={style}>
-                  <Typography id="spring-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                  </Typography>
-                  <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                  </Typography>
-                </Box>
-              </Fade>
-            </Modal>
-
-
-            <Modal
-              aria-labelledby="spring-modal-title"
-              aria-describedby="spring-modal-description"
-              open={open}
-              onClose={handleGroupclose}
-              closeAfterTransition
-              slots={{ backdrop: Backdrop }}
-              slotProps={{
-                backdrop: {
-                  TransitionComponent: Fade,
-                },
-              }}
-            >
-              <Fade in={handleGroupopen}>
-                <Box sx={style}>
-                     <form className="w-100">
-                      <textarea id="postField" className="form-control pe-4 border-0" rows="2" onInput={autoResize()} onFocus={ focusPost } data-autoresize="" placeholder="Say something....."></textarea>
-                    </form>
-                </Box>
-              </Fade>
-            </Modal> */}
-
-
+            <div className="col-12">      
 
               <Tabs
                   defaultActiveKey="photos"
@@ -282,10 +229,8 @@ export default function Profile() {
                   fill
                 >
                   <Tab eventKey="photos" title="Photos">
-                      <Album />
-                      
-                  </Tab>
-                  
+                      <Album />                      
+                  </Tab>                  
                   <Tab eventKey="friends" title="Friends">
                       <ImageList
                         sx={{}}

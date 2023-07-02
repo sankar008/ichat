@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
@@ -94,15 +94,48 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     pb: 0,
   };
 
+  const initialvalue = {
+    title: "",
+    details: "",
+    image: "",
+    onlyMe: ""
+  };
+
 const Index = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const albumClose = () => setOpen(false);
 
+    const [formData, setformData] = React.useState(initialvalue);
+
+    const [imageData, setImagedata] = useState([]);
+
+    const [imageArray, setImageArray] = useState([]);
+
+    const handalerChanges = async (e) => {     
+      const { name, value } = e.target;
+      setformData({ ...formData, [name]: value });
+    }
+
+    const imageHandelar = async (e) => {
+      let files = e.target.files;
+      let fileReader = new FileReader();
+      fileReader.readAsDataURL(files[0]);
+
+      fileReader.onload = async (event) => {
+          let imageurl = imageArray;
+          imageurl.push(event.target.result);
+          setImagedata(imageData)
+          setImageArray(imageData)
+      }
+
+      console.log(imageData);
+      
+    };
+
 
   return (
-    <>
-    
+    <>    
     <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -121,71 +154,54 @@ const Index = () => {
             <Grid container spacing={2} sx={{ '& .MuiTextField-root': { width: '100%' }, }}>
                 <Grid item xs={12} sx={{ borderBottom: '1px solid #f3f3f3' }}>
                     <Button sx={{ position: 'absolute', right: '0', top: '0' }} onClick={albumClose}>Close</Button>
-                    {/* <Item>xs=8</Item> */}
                     <Typography id="spring-modal-title" className='mb-2' variant="h6" component="h2">
-                        Your Album name
+                        Create Your Album
                     </Typography>
                 </Grid>
                 <Grid item xs={3} sx={{ pr: '16px', py: 2, background: '#f3f3f3', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <TextField
                         id="fieldID-placed-here"
                         label="Album Name"
-                        placeholder="Hello placeholder"
+                        name="title"
+                        placeholder="Album name"
                         defaultValue=""
-                        helperText="Some important text"
                         size="small"
                         variant="outlined"
+                        onChange={handalerChanges}
                     />
+                    
                     <TextField
                         id="standard-helperText"
-                        label="Helper text"
+                        label="Description"
+                        placeholder='Describe your album ...'
                         defaultValue=""
-                        helperText="Some important text"
+                        name="details"
                         size="small"
                         variant="outlined"
+                        onChange={handalerChanges}
                     />
+
                     <TextField
                         id="fieldID-placed-here"
                         label=""
                         placeholder=""
                         type="file"
-                        defaultValue=""
-                        helperText="Some important text"
+                        name="image"
                         size="small"
                         variant="outlined"
+                        onChange={imageHandelar}
+                        multiple
                     />
-                    <FormControlLabel label="Label" labelPlacement="start" control={<Switch defaultChecked />} sx={{ display: 'flex', justifyContent: 'space-between' }} />
-
-                    <FormControl>
-                        <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-                        <RadioGroup
-                            row
-                            aria-labelledby="demo-row-radio-buttons-group-label"
-                            name="row-radio-buttons-group"
-                        >
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
-                            <FormControlLabel
-                            value="disabled"
-                            disabled
-                            control={<Radio />}
-                            label="other"
-                            />
-                        </RadioGroup>
-                    </FormControl>
-
+                    <FormControlLabel name="onlyMe" label="Public" labelPlacement="start" control={<Switch defaultChecked />} sx={{ display: 'flex', justifyContent: 'space-between' }} />   
 
                     <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
                 </Grid>
                 <Grid item xs={9}>
-                    <ImageList className='album-images' sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-                        {modalData.map((item) => (
-                            <ImageListItem key={item.img} sx={{ position: 'relative' }}>
+                    <ImageList className='album-images' sx={{ width: 500, height: 450 }} cols={3} data-id={imageArray.length} rowHeight={164}>
+                        {imageArray.map((item, key) => (
+                            <ImageListItem key={key} sx={{ position: 'relative' }}>
                                 <img
-                                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                    alt={item.title}
+                                    src={item}
                                     loading="lazy"
                                 />
                                 <div className="actionBtns">
@@ -212,10 +228,7 @@ const Index = () => {
                         ))}
                     </ImageList>
                 </Grid>
-            </Grid>
-            {/* <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography> */}
+            </Grid>      
           </Box>
         </Fade>
       </Modal>
@@ -229,7 +242,7 @@ const Index = () => {
         <ImageListItem cols={1} rows={1}>
             <Link>
                 <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
-                    <FaPlus size="60"/>
+                    <FaPlus size="60" onClick={handleOpen}/>
                 </Card>
             </Link>
         </ImageListItem>
