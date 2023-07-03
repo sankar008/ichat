@@ -110,7 +110,7 @@ const Index = () => {
 
     const [imageData, setImagedata] = useState([]);
 
-    const [imageArray, setImageArray] = useState([]);
+    const [imageArray, setImagearray] = useState([]);
 
     const handalerChanges = async (e) => {     
       const { name, value } = e.target;
@@ -118,20 +118,16 @@ const Index = () => {
     }
 
     const imageHandelar = async (e) => {
-      let files = e.target.files;
-      let fileReader = new FileReader();
-      fileReader.readAsDataURL(files[0]);
-
-      fileReader.onload = async (event) => {
-          let imageurl = imageArray;
-          imageurl.push(event.target.result);
+      const file = e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", () => {
+          imageData.push(fileReader.result)
           setImagedata(imageData)
-          setImageArray(imageData)
-      }
-
-      console.log(imageData);
-      
+          setImagearray(fileReader.result);
+        });
+        fileReader.readAsDataURL(file);  
     };
+
 
 
   return (
@@ -198,7 +194,7 @@ const Index = () => {
                 </Grid>
                 <Grid item xs={9}>
                     <ImageList className='album-images' sx={{ width: 500, height: 450 }} cols={3} data-id={imageArray.length} rowHeight={164}>
-                        {imageArray.map((item, key) => (
+                        {imageData.map((item, key) => (
                             <ImageListItem key={key} sx={{ position: 'relative' }}>
                                 <img
                                     src={item}
@@ -225,7 +221,7 @@ const Index = () => {
                                     </ul>
                                 </div>
                             </ImageListItem>
-                        ))}
+                        ))} 
                     </ImageList>
                 </Grid>
             </Grid>      
