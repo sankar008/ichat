@@ -86,7 +86,7 @@ const Index = () => {
 
                             <ul className="nav nav-link-secondary flex-column fw-bold gap-3">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to=""> 
+                                    <Link className="nav-link" to="/parent/feed"> 
                                         <MdHomeFilled className="navIcon" size="1.6em" />
                                         <span>Home </span>
                                     </Link>
@@ -122,7 +122,7 @@ const Index = () => {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="">
+                                    <Link className="nav-link" to="/profile">
                                         <Avatar className="navIcon" alt="" src={ imgFeed.userDefault } sx={{ width: 22, height: 22 }} />
                                         <span>Profile </span>
                                     </Link>
