@@ -11,7 +11,8 @@ import SignupChild from "../kids/SignupChild";
 import LoginChild from "../kids/LoginChild"
 import LoginParent from "../parents/LoginParent";
 import Profile from "../Profile";
-import Feed from "../Feed";
+import ParentFeed from "../parents/feed/Feed";
+import KidsFeed from "../kids/feed/Feed";
 import Page404 from "../Page404";
 import ParentsForgotPassword from "../parents/ForgotPassword.js"
 import KidsForgotPassword from "../kids/ForgotPassword.js"
@@ -32,7 +33,8 @@ const BasicRoutes = () => {
           <Route exact path="/kids/forgot-password" element={<KidsForgotPassword />} />
 
           <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/feed" element={<Feed />} />
+          <Route exact path="/parent/feed" element={<ParentFeed />} />
+          <Route exact path="/kids/feed" element={<KidsFeed />} />
           <Route path="*" element={<Page404 />} />
         </Routes>     
     </Router>
