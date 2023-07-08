@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './friends.scss'
 import * as friendImg from '../../../assets/img/ImgLib.js'
@@ -48,6 +48,19 @@ const Index = () => {
                 </CardActions>
             </Card>
         </div>
+
+        <div className="col-lg-3 col-md-6">
+            <Card className='text-bg-dark'>
+                <CardContent>
+                    <div className="wrapper">
+                        <div className="text-end">
+                            <IconButton className='btn btn-light' color="light"><FaUserAltSlash /></IconButton>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
+        
     </div>
     </>
   )

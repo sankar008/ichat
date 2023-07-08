@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import Friends from './particals/Friends'
+import Group from './particals/Group'
 import * as imgProfile from '../assets/img/ImgLib.js';
 import './profile.scss'
 
@@ -13,6 +14,7 @@ import { faLayerGroup, faPen, faSearch, faTrash } from '@fortawesome/free-solid-
 import { FaPlus, FaPaperPlane, FaPen } from 'react-icons/fa'
 import { PiPaperPlaneRightFill, PiX, PiXBold } from 'react-icons/pi'
 import { IoImages, IoIosCloudOutline } from 'react-icons/io'
+import { AiOutlineLogout } from 'react-icons/ai'
 
 
 import Tab from 'react-bootstrap/Tab';
@@ -174,8 +176,9 @@ export default function Profile() {
               <div className="user-holder">
                 <h1 className="userName">{`Mandy Richardson`}</h1>
                 <div className="chat">
-                  <p className="m-0 me-4"><small>Leave a message</small></p>
-                  <Link className='btn btn-theme btn-outline-light py-2'>Chat</Link>
+                  <p className="m-0 me-2"><small>Leave a message</small></p>
+                  <Link className='btn btn-theme btn-outline-light me-4 py-2'>Chat</Link>
+                  <Link className='btn btn-theme btn-outline-light py-2'> Logout <AiOutlineLogout className="me-n1"/></Link>
                 </div>
               </div>
             </div>
@@ -250,9 +253,8 @@ export default function Profile() {
                   <Tab eventKey="friends" title="Friends">
                       <Friends />
                   </Tab>
-
-                  <Tab eventKey="clubs" title="Clubs">
-                      <Typography>Here will be joined members</Typography>
+                  <Tab eventKey="group" title="Group">
+                      <Group />
                   </Tab>
               </Tabs>
 
