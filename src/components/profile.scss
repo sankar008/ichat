@@ -17,7 +17,13 @@
     position: absolute;
     right: 20px;
     bottom: 20px;
-    .MuiIconButton-root {
+    .imageUpload {
         border: 5px solid #000;
+        font-size: 1.5rem;
+        padding: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #1c1c1c;
+        cursor: pointer;
     }
 }

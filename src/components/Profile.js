@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
+import Friends from './particals/Friends'
 import * as imgProfile from '../assets/img/ImgLib.js';
 import './profile.scss'
 
@@ -106,6 +107,9 @@ export default function Profile() {
 
   let [ focusedInputAbout, setFocusedInputAbout ] = useState(false);
 
+  const imageUploading = () => {
+    /* profile image upload */
+  }
 
   
   useEffect(() => {
@@ -144,7 +148,19 @@ export default function Profile() {
                     overlap="circular"
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                     badgeContent={
-                      <IconButton sx={{ background: '#f3f3f3' }}><FaPen /></IconButton>
+                      <>
+                      {/* <IconButton sx={{ background: '#f3f3f3' }}><FaPen /></IconButton> */}
+                      <input
+                        type="file"
+                        id="imageUpload"
+                        accept=".png, .jpg, .jpeg"
+                        onChange={imageUploading}
+                        hidden
+                      />
+                      <label className="imageUpload" htmlFor="imageUpload">
+                        <FaPen />
+                      </label>
+                      </>
                     }
                   >
                       <Avatar src={ imgProfile.imgProfileU } alt={`Mandy Richardson`} sx={{
@@ -232,23 +248,7 @@ export default function Profile() {
                       <Album />                      
                   </Tab>                  
                   <Tab eventKey="friends" title="Friends">
-                      <ImageList
-                        sx={{}}
-                        variant="quilted"
-                        cols={6}
-                        //rowHeight={121}
-                      >
-                        
-                        {itemData.map((item) => (
-                          <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                            <img
-                              {...srcset(item.img, 121, item.rows, item.cols)}
-                              alt={item.title}
-                              loading="lazy"
-                            />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
+                      <Friends />
                   </Tab>
 
                   <Tab eventKey="clubs" title="Clubs">
