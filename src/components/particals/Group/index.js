@@ -106,7 +106,7 @@ const Index = () => {
                     </Typography>
                 </CardContent>
                 <CardActions sx={{ padding: '16px' }}>
-                    <Typography>5.7k members</Typography>
+                    <Typography class="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>5.7k members</Typography>
                     <AvatarGroup className="ms-auto" max={4} spacing="small">
                         <Avatar alt="Remy Sharp" src={ groupImg.userOne } />
                         <Avatar alt="Travis Howard" src={ groupImg.userOne } />
