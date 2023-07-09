@@ -33,6 +33,10 @@ import Album from './particals/album'
 import { IoIosImages } from 'react-icons/io';
 import { IoMdImages } from 'react-icons/io';
 
+import axios from "axios";
+import * as c from "./../api/constant";
+import { toast } from "react-toastify";
+
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
@@ -103,18 +107,61 @@ const style = {
 
 export default function Profile() {
 
-  /* const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false); */
+  const [userDetails, setUserdetails] = React.useState([]);
+  const [userImage, setUserimage] = useState(imgProfile.imgProfileU);
+  //c.IMG+"/"+userDetails.image
 
   let [ focusedInputAbout, setFocusedInputAbout ] = useState(false);
 
-  const imageUploading = () => {
-    /* profile image upload */
+  const imageUploading = async (e) => {
+      const file = e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", async () => {
+          setUserimage(fileReader.result)
+          const header = localStorage.getItem("__tokenCode");     
+          const url = c.USER;
+          const data = {image: fileReader.result, userCode: localStorage.getItem("__userId")}
+          const res = await axios.patch(url, data, {
+            headers: JSON.parse(header),
+          });
+          if(res.data.success == 1){
+            toast("Image updated successfully!!", {
+              position: "top-right",
+              autoClose: 5000,
+              type: "success",
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+          });
+          } 
+        });
+      fileReader.readAsDataURL(file);   
+
+  } 
+
+  const getUser = async () =>{
+    const header = localStorage.getItem("__tokenCode");       
+        const url = c.USER + "/" + localStorage.getItem("__userId");
+        const res = await axios.get(url, {
+            headers: JSON.parse(header),
+        });
+        if(res.data.success == 1){
+          setUserdetails(res.data.data);
+          setUserimage(c.IMG+"/"+res.data.data.image)
+        }  
   }
+
+
+
+
+
 
   
   useEffect(() => {
+    getUser();
     const skipPost = (event) => {
       if (event.key === 'Escape') {
           setFocusedInputAbout(false);
@@ -132,9 +179,7 @@ export default function Profile() {
   }, [focusedInputAbout]);
 
 
-
-  return (
-    
+  return (    
     JSON.parse(localStorage.getItem("isLoginCheck"))?
     <>
       <section className="banner" style={{'--imgBan': 'url("' + imgProfile.banProfile + '")'}}>
@@ -165,7 +210,7 @@ export default function Profile() {
                       </>
                     }
                   >
-                      <Avatar src={ imgProfile.imgProfileU } alt={`Mandy Richardson`} sx={{
+                      <Avatar src={ userImage } alt={`Mandy Richardson`} sx={{
                         width: '21.75rem', 
                         height: '21.75rem', 
                         borderRadius: 5, 
@@ -174,7 +219,7 @@ export default function Profile() {
                 </Badge>
               </div>
               <div className="user-holder">
-                <h1 className="userName">{`Mandy Richardson`}</h1>
+                <h1 className="userName">{userDetails.firstName+' '+userDetails.lastName}</h1>
                 <div className="chat">
                   <p className="m-0 me-2"><small>Leave a message</small></p>
                   <Link className='btn btn-theme btn-outline-light me-4 py-2'>Chat</Link>
@@ -182,9 +227,7 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            {/* <div className="col-12">
-                <h4 className="display-6">This is your profile</h4>
-            </div> */}
+          
           </div>
           { focusedInputAbout? (
             <div className="active-overlay"></div>

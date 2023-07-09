@@ -37,12 +37,11 @@ const Index = () => {
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
-
     
   return (
     <>
     <div className="row g-3">
-        <div className="col-lg-4 col-md-6">
+        <div className="col-lg-3 col-md-6">
             <Card className='text-bg-dark'>
                 <CardHeader
                     avatar={
@@ -115,11 +114,8 @@ const Index = () => {
                         <Avatar alt="Trevor Henderson" src={ groupImg.userOne } />
                     </AvatarGroup>
                 </CardActions>
-            </Card>
-            
-        </div>
-
-        
+            </Card>            
+        </div>        
     </div>
     </>
   )
