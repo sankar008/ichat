@@ -5,28 +5,35 @@ import './group.scss'
 import * as groupImg from '../../../assets/img/ImgLib.js'
 
 import { FaHeartbeat, FaShare, FaUserAltSlash, FaEllipsisV } from 'react-icons/fa'
-import { AvatarGroup, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, List, ListItem, Typography, Menu, MenuItem, ImageListItem } from '@mui/material'
+import { AvatarGroup, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, List, ListItem, Typography, Menu, MenuItem, ImageListItem, Modal, Box, createTheme, ThemeProvider, TextField, FormControlLabel, FormControl, InputLabel, Select } from '@mui/material'
 import styled from '@emotion/styled'
 
 import { FaEye, FaPlus, FaTimes } from 'react-icons/fa'
+import { IoMdClose } from 'react-icons/io'
 
 
 
 
-const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: 700,
+    bgcolor: '#212121',
+    color: '#aaaaaa',
+    border: '2px solid #000',
+    boxShadow: 24,
+  };
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
 const Index = () => {
 
-    const [expanded, setExpanded] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [popopen, setPopopen] = React.useState(false);
     const handleOpen = () => setPopopen(true);
@@ -38,25 +45,106 @@ const Index = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    const [modalOpen, setModalOpen] = React.useState(false);
+    const handleModOpen = () => setModalOpen(true);
+    const handleModClose = () => setModalOpen(false);
+    const [modCategory, setModCategory] = React.useState('');
 
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
+    const modalSelectItem = (event) => {
+        setModCategory(event.target.value);
     };
     
   return (
     <>
+    <Modal
+        keepMounted
+        open={modalOpen}
+        onClose={handleModClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+            <ThemeProvider theme={darkTheme}>
+                <Box sx={{ px: 4, py: 1, borderBottom: '1px solid #f3f3f3' }}>
+                    <Button sx={{ position: 'absolute', right: '0', top: '5px' }} onClick={handleModClose}><IoMdClose size="20" /> &nbsp; Close</Button>
+                    <Typography id="spring-modal-title" className='' variant="h6" component="h2">
+                        Create Your Album
+                    </Typography>
+                </Box>
+                <Box sx={{ px: 4, py: 2, display: 'flex', flexDirection: 'column' }}>
+                    <div class="profile-pic-wrapper mb-3">
+                        <div className="pic-holder">
+                            <img id="profilePic" className="pic" src={ groupImg.banProfile } alt="" />
+                            <form className='d-none' enctype="multipart/form-data">
+                                <input type="file" accept="image/*" id="newProfilePhoto" className="uploadProfileInput" />
+                            </form>
+                            <label htmlFor="newProfilePhoto" className="upload-file-block">
+                                <div className="text-center">
+                                    <div className="mb-2"></div>
+                                    <div className="text-uppercase">Upload <br /> Groups Photo</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <TextField
+                        id="fieldID-placed-here"
+                        className="mb-3"
+                        label="Album Name"
+                        name="title"
+                        placeholder="Album name"
+                        defaultValue=""
+                        size="small"
+                        variant="outlined"
+                        //   onChange={handalerChanges}
+                    />
+
+                    <FormControl className='mb-3' fullWidth>
+                        <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={modCategory}
+                            label="Select Category"
+                            onChange={modalSelectItem}
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
+                    
+                    <TextField
+                        id="standard-helperText"
+                        className='mb-3'
+                        label="Description"
+                        placeholder='Describe your album ...'
+                        defaultValue=""
+                        name="details"
+                        size="small"
+                        variant="outlined"
+                        multiline
+                        maxRows={4}
+                        //   onChange={handalerChanges}
+                    />
+
+                        <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
+                </Box>
+            </ThemeProvider>
+        </Box>
+    </Modal>
     <div className="row g-3">
 
-    <div className="col-lg-3 col-md-6">
+        <div className="col-lg-3 col-md-6">
 
-    <ImageListItem cols={1} rows={1} sx={{ display: 'flex'}} style={{ height: '100%'}} >
-            <Link style={{ flex: '1 1 auto' }} onClick={handleOpen}>
-                <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
-                    <FaPlus size="60"/>
-                </Card>
-            </Link>
-        </ImageListItem>
-    </div>
+            <ImageListItem cols={1} rows={1} sx={{ display: 'flex'}} style={{ height: '100%'}} >
+                <Link style={{ flex: '1 1 auto' }} onClick={handleModOpen}>
+                    <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
+                        <FaPlus size="60"/>
+                    </Card>
+                </Link>
+            </ImageListItem>
+        </div>
 
 
         <div className="col-lg-3 col-md-6">
