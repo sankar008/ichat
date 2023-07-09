@@ -11,17 +11,23 @@ import { faLayerGroup, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FaEye, FaPlus, FaTimes } from 'react-icons/fa'
 
 
-import { Box, Button, Card, Container, FormControl, FormControlLabel, FormLabel, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Modal, Paper, Radio, RadioGroup, Switch, Typography } from '@mui/material'
+import { Box, Button, Card, Container, FormControl, FormControlLabel, FormLabel, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Modal, Paper, Radio, RadioGroup, Switch, ThemeProvider, Typography, createTheme } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import { useSpring, animated } from '@react-spring/web';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
 import styled from '@emotion/styled';
+import { IoMdClose } from 'react-icons/io';
 
 
 
 
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 function srcset(image, size, rows = 1, cols = 1) {
     return {
       src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -87,7 +93,9 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '70vw',
-    bgcolor: 'background.paper',
+    // bgcolor: 'background.paper',
+    bgcolor: '#212121',
+    color: '#aaaaaa',
     border: '2px solid #000',
     boxShadow: 24,
     p: 2,
@@ -132,7 +140,7 @@ const Index = () => {
 
   return (
     <>    
-    <Modal
+      <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         open={open}
@@ -146,51 +154,55 @@ const Index = () => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Box className="mdlSD" sx={style}>
             <Grid container spacing={2} sx={{ '& .MuiTextField-root': { width: '100%' }, }}>
                 <Grid item xs={12} sx={{ borderBottom: '1px solid #f3f3f3' }}>
-                    <Button sx={{ position: 'absolute', right: '0', top: '0' }} onClick={albumClose}>Close</Button>
+                  <ThemeProvider theme={darkTheme}>
+                    <Button sx={{ position: 'absolute', right: '0', top: '0' }} onClick={albumClose}><IoMdClose size="20" /> &nbsp; Close</Button>
                     <Typography id="spring-modal-title" className='mb-2' variant="h6" component="h2">
                         Create Your Album
                     </Typography>
+                  </ThemeProvider>
                 </Grid>
-                <Grid item xs={3} sx={{ pr: '16px', py: 2, background: '#f3f3f3', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <TextField
-                        id="fieldID-placed-here"
-                        label="Album Name"
-                        name="title"
-                        placeholder="Album name"
-                        defaultValue=""
-                        size="small"
-                        variant="outlined"
-                        onChange={handalerChanges}
-                    />
-                    
-                    <TextField
-                        id="standard-helperText"
-                        label="Description"
-                        placeholder='Describe your album ...'
-                        defaultValue=""
-                        name="details"
-                        size="small"
-                        variant="outlined"
-                        onChange={handalerChanges}
-                    />
+                <Grid item xs={3} sx={{ pr: '16px', py: 2, background: '#161616', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <ThemeProvider theme={darkTheme}>
+                      <TextField
+                          id="fieldID-placed-here"
+                          label="Album Name"
+                          name="title"
+                          placeholder="Album name"
+                          defaultValue=""
+                          size="small"
+                          variant="outlined"
+                          onChange={handalerChanges}
+                      />
+                      
+                      <TextField
+                          id="standard-helperText"
+                          label="Description"
+                          placeholder='Describe your album ...'
+                          defaultValue=""
+                          name="details"
+                          size="small"
+                          variant="outlined"
+                          onChange={handalerChanges}
+                      />
 
-                    <TextField
-                        id="fieldID-placed-here"
-                        label=""
-                        placeholder=""
-                        type="file"
-                        name="image"
-                        size="small"
-                        variant="outlined"
-                        onChange={imageHandelar}
-                        multiple
-                    />
-                    <FormControlLabel name="onlyMe" label="Public" labelPlacement="start" control={<Switch defaultChecked />} sx={{ display: 'flex', justifyContent: 'space-between' }} />   
+                      <TextField
+                          id="fieldID-placed-here"
+                          label=""
+                          placeholder=""
+                          type="file"
+                          name="image"
+                          size="small"
+                          variant="outlined"
+                          onChange={imageHandelar}
+                          multiple
+                      />
+                      <FormControlLabel name="onlyMe" label="Public" labelPlacement="start" control={<Switch defaultChecked />} sx={{ display: 'flex', justifyContent: 'space-between' }} />   
 
-                    <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
+                      <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
+                    </ThemeProvider>
                 </Grid>
                 <Grid item xs={9}>
                     <ImageList className='album-images' sx={{ width: 500, height: 450 }} cols={3} data-id={imageArray.length} rowHeight={164}>
@@ -235,10 +247,10 @@ const Index = () => {
         variant="quilted"
         cols={6}
         >
-        <ImageListItem cols={1} rows={1}>
-            <Link>
+        <ImageListItem cols={1} rows={1} sx={{ display: 'flex' }}>
+            <Link style={{ flex: '1 1 auto' }} onClick={handleOpen}>
                 <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
-                    <FaPlus size="60" onClick={handleOpen}/>
+                    <FaPlus size="60"/>
                 </Card>
             </Link>
         </ImageListItem>
