@@ -66,7 +66,7 @@ const Index = () => {
       >
         <Box sx={style}>
             <ThemeProvider theme={darkTheme}>
-                <Box sx={{ px: 4, py: 1, borderBottom: '1px solid #f3f3f3' }}>
+                <Box sx={{ px: 4, py: 1, borderBottom: '1px solid #424242' }}>
                     <Button sx={{ position: 'absolute', right: '2em', top: '5px' }} onClick={handleModClose}><IoMdClose size="20" /> &nbsp; Close</Button>
                     <Typography id="spring-modal-title" className='' variant="h6" component="h2">
                         Create Your Album
