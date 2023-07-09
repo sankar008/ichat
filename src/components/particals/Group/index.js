@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import './group.scss'
 import * as groupImg from '../../../assets/img/ImgLib.js'
 
 import { FaHeartbeat, FaShare, FaUserAltSlash, FaEllipsisV } from 'react-icons/fa'
-import { AvatarGroup, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, List, ListItem, Typography, Menu, MenuItem } from '@mui/material'
+import { AvatarGroup, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, List, ListItem, Typography, Menu, MenuItem, ImageListItem } from '@mui/material'
 import styled from '@emotion/styled'
 
+import { FaEye, FaPlus, FaTimes } from 'react-icons/fa'
 
 
 
@@ -26,6 +28,9 @@ const Index = () => {
 
     const [expanded, setExpanded] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [popopen, setPopopen] = React.useState(false);
+    const handleOpen = () => setPopopen(true);
+
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -41,7 +46,21 @@ const Index = () => {
   return (
     <>
     <div className="row g-3">
+
+    <div className="col-lg-3 col-md-6">
+
+    <ImageListItem cols={1} rows={1} sx={{ display: 'flex'}} style={{ height: '100%'}} >
+            <Link style={{ flex: '1 1 auto' }} onClick={handleOpen}>
+                <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
+                    <FaPlus size="60"/>
+                </Card>
+            </Link>
+        </ImageListItem>
+    </div>
+
+
         <div className="col-lg-3 col-md-6">
+
             <Card className='text-bg-dark'>
                 <CardHeader
                     avatar={
@@ -105,7 +124,7 @@ const Index = () => {
                     </Typography>
                 </CardContent>
                 <CardActions sx={{ padding: '16px' }}>
-                    <Typography class="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>5.7k members</Typography>
+                    <Typography className="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>5.7k members</Typography>
                     <AvatarGroup className="ms-auto" max={4} spacing="small">
                         <Avatar alt="Remy Sharp" src={ groupImg.userOne } />
                         <Avatar alt="Travis Howard" src={ groupImg.userOne } />
