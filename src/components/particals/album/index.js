@@ -164,7 +164,7 @@ const Index = () => {
                     </Typography>
                   </ThemeProvider>
                 </Grid>
-                <Grid item xs={3} sx={{ pr: '16px', py: 2, background: '#161616', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <Grid item lg={3} md={4} xs={12} sx={{ pr: '16px', py: 2, background: '#161616', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <ThemeProvider theme={darkTheme}>
                       <TextField
                           id="fieldID-placed-here"
@@ -204,8 +204,8 @@ const Index = () => {
                       <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
                     </ThemeProvider>
                 </Grid>
-                <Grid item xs={9}>
-                    <ImageList className='album-images' sx={{ width: 500, height: 450 }} cols={3} data-id={imageArray.length} rowHeight={164}>
+                <Grid item lg={9} md={8} xs={12}>
+                    <ImageList className='album-images' sx={{ width: 500, minHeight: 250 }} cols={3} data-id={imageArray.length} rowHeight={164}>
                         {imageData.map((item, key) => (
                             <ImageListItem key={key} sx={{ position: 'relative' }}>
                                 <img
