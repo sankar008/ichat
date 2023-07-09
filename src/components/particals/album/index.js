@@ -211,6 +211,7 @@ const Index = () => {
                                 <img
                                     src={item}
                                     loading="lazy"
+                                    alt=""
                                 />
                                 <div className="actionBtns">
                                     <ul className="list-inline">
