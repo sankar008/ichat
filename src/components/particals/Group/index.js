@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment';
 
 import './group.scss'
 import * as groupImg from '../../../assets/img/ImgLib.js'
@@ -11,6 +12,9 @@ import styled from '@emotion/styled'
 import { FaEye, FaPlus, FaTimes } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
+import axios from "axios";
+import * as c from "../../../api/constant";
+import { toast } from "react-toastify";
 
 
 
@@ -37,7 +41,8 @@ const Index = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [popopen, setPopopen] = React.useState(false);
     const handleOpen = () => setPopopen(true);
-
+    const [category, setCategory] = React.useState([]);
+    const [groupImage, setGroupimage] = React.useState('');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -45,15 +50,110 @@ const Index = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const initialvalue = {
+        groupName: "",
+        groupDetails: "",
+        catCode: '',
+        image: ''
+    };
     
     const [modalOpen, setModalOpen] = React.useState(false);
     const handleModOpen = () => setModalOpen(true);
     const handleModClose = () => setModalOpen(false);
-    const [modCategory, setModCategory] = React.useState('');
+    const [formData, setformData] = React.useState(initialvalue);
 
-    const modalSelectItem = (event) => {
-        setModCategory(event.target.value);
-    };
+    const [group, setGroup] = React.useState([]);
+  
+
+
+    const getGroupcategory = async () => {
+        const header = localStorage.getItem("__tokenCode");       
+        const url = c.CATEGORY;
+        const res = await axios.get(url, {
+            headers: JSON.parse(header),
+        }); 
+        if(res.data.success == 1){
+            setCategory(res.data.data)
+        }
+    }
+
+    const imageHandel = async (e) => {
+        const file = e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", async () => {
+            setGroupimage(fileReader.result)
+        });
+        fileReader.readAsDataURL(file); 
+    }
+
+    const handalerChanges = async (e) => {
+        const { name, value } = e.target;
+        setformData({ ...formData, [name]: value });    
+    }
+
+    const submitDataHandel = async (e) => {
+        
+        const errormsg = groupImage?formData.groupName?formData.catCode?formData.groupDetails?'':"Group details is a required field":"Category is a required field":"Group name is a required field":"Group Image is a required field";
+        
+        if(errormsg){
+            toast(errormsg, {
+                position: "top-right",
+                autoClose: 5000,
+                type: "error",
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }else{
+            formData.image = groupImage;
+            formData.userId = localStorage.getItem("__userId");
+            const header = localStorage.getItem("__tokenCode");       
+            const url = c.GROUPS;
+            const res = await axios.post(url, formData, {
+                headers: JSON.parse(header),
+            }); 
+
+
+            if(res.data.success == 1){
+                getGroup();
+                toast("Group added successfully!!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    type: "success",
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });    
+                handleModClose(true)        
+            }
+            
+        }
+    }
+
+    const getGroup = async () => {
+        const header = localStorage.getItem("__tokenCode");       
+        const url = c.GROUPS;
+        const res = await axios.get(url, {
+            headers: JSON.parse(header),
+        }); 
+        if(res.data.success == 1){
+            setGroup(res.data.data)
+        }
+    }
+
+
+    useEffect(() => {
+        getGroupcategory();
+        getGroup();
+      }, []);
+
     
   return (
     <>
@@ -73,11 +173,11 @@ const Index = () => {
                     </Typography>
                 </Box>
                 <Box sx={{ px: 4, py: 2, display: 'flex', flexDirection: 'column' }}>
-                    <div class="profile-pic-wrapper mb-3">
+                    <div className="profile-pic-wrapper mb-3">
                         <div className="pic-holder">
-                            <img id="profilePic" className="pic" src={ groupImg.banProfile } alt="" />
-                            <form className='d-none' enctype="multipart/form-data">
-                                <input type="file" accept="image/*" id="newProfilePhoto" className="uploadProfileInput" />
+                            <img id="profilePic" className="pic" src={ groupImage?groupImage:groupImg.banProfile } alt="" />
+                            <form className='d-none' encType="multipart/form-data">
+                                <input type="file" accept="image/*" id="newProfilePhoto" className="uploadProfileInput" onChange={imageHandel}/>
                             </form>
                             <label htmlFor="newProfilePhoto" className="upload-file-block">
                                 <div className="text-center">
@@ -90,13 +190,13 @@ const Index = () => {
                     <TextField
                         id="fieldID-placed-here"
                         className="mb-3"
-                        label="Album Name"
-                        name="title"
-                        placeholder="Album name"
+                        label="Group Name"
+                        name="groupName"
+                        placeholder="Group name"
                         defaultValue=""
                         size="small"
                         variant="outlined"
-                        //   onChange={handalerChanges}
+                        onChange={handalerChanges}
                     />
 
                     <FormControl className='mb-3' fullWidth>
@@ -104,13 +204,19 @@ const Index = () => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={modCategory}
+                            value={formData.catCode}
                             label="Select Category"
-                            onChange={modalSelectItem}
+                            name="catCode"
+                            onChange={handalerChanges}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {
+                                category.map((item, key) => {
+                                    return (
+                                        <MenuItem key={key} value={item.catCode}>{item.catName}</MenuItem>
+                                    )
+                                })
+                            }
+
                         </Select>
                     </FormControl>
                     
@@ -120,15 +226,15 @@ const Index = () => {
                         label="Description"
                         placeholder='Describe your album ...'
                         defaultValue=""
-                        name="details"
+                        name="groupDetails"
                         size="small"
                         variant="outlined"
                         multiline
                         maxRows={4}
-                        //   onChange={handalerChanges}
+                        onChange={handalerChanges}
                     />
 
-                        <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
+                        <Button className='mt-auto' variant="contained" type="submit" onClick={submitDataHandel}>Submit</Button>
                 </Box>
             </ThemeProvider>
         </Box>
@@ -147,82 +253,81 @@ const Index = () => {
         </div>
 
 
-        <div className="col-lg-3 col-md-6">
 
-            <Card className='text-bg-dark'>
-                <CardHeader
-                    avatar={
-                    <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" src={ groupImg.userOne }>
-                        R
-                    </Avatar>
-                    }
-                    action={
-                    <IconButton 
-                        id="demo-positioned-button"
-                        className="btn btn-light" 
-                        aria-label="settings" 
-                        sx={{ color: '#cecece8a' }} 
-                        style={{'--bs-text-opacity': '.4'}}
-                        aria-controls={open ? 'demo-positioned-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
+            {group.map((grp, key)=>{
+                return (
+                    <div className="col-lg-3 col-md-6">
+                    <Card key={key} className='text-bg-dark'>
+                    <CardHeader
+                       
+                        action={
+                        <IconButton 
+                            id="demo-positioned-button"
+                            className="btn btn-light" 
+                            aria-label="settings" 
+                            sx={{ color: '#cecece8a' }} 
+                            style={{'--bs-text-opacity': '.4'}}
+                            aria-controls={open ? 'demo-positioned-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                            onClick={handleClick}
+                        >
+                            <FaEllipsisV />
+                        </IconButton>
+                        }
+                        title={grp.groupName.substring(0,20)}
+                        subheader={
+                            <>
+                            <Typography className="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>{moment(grp.createAt).format('MM-DD-YYYY')
+}</Typography>
+                            </>
+                        }
+                    />
+                    <Menu
+                        id="demo-positioned-menu"
+                        aria-labelledby="demo-positioned-button"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                        }}
                     >
-                        <FaEllipsisV />
-                    </IconButton>
-                    }
-                    title="Group Title"
-                    subheader={
-                        <>
-                        <Typography className="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>September 14, 2016</Typography>
-                        </>
-                    }
-                />
-                <Menu
-                    id="demo-positioned-menu"
-                    aria-labelledby="demo-positioned-button"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                >
-                    <MenuItem onClick={handleClose}>Edit Group</MenuItem>
-                    <MenuItem onClick={handleClose}>Exit Group</MenuItem>
-                    <MenuItem onClick={handleClose}>Remove Group</MenuItem>
-                </Menu>
-
-                <CardMedia
-                    component="img"
-                    image={ groupImg.banProfile }
-                    alt="Paella dish"
-                    sx={{ height: '10em' }}
-                />
-                <CardContent>
-                    <Typography variant="body2">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
-                    </Typography>
-                </CardContent>
-                <CardActions sx={{ padding: '16px' }}>
-                    <Typography className="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>5.7k members</Typography>
-                    <AvatarGroup className="ms-auto" max={4} spacing="small">
-                        <Avatar alt="Remy Sharp" src={ groupImg.userOne } />
-                        <Avatar alt="Travis Howard" src={ groupImg.userOne } />
-                        <Avatar alt="Cindy Baker" src={ groupImg.userOne } />
-                        <Avatar alt="Agnes Walker" src={ groupImg.userOne } />
-                        <Avatar alt="Trevor Henderson" src={ groupImg.userOne } />
-                    </AvatarGroup>
-                </CardActions>
-            </Card>            
-        </div>        
+                        <MenuItem onClick={handleClose}>Edit Group</MenuItem>
+                        <MenuItem onClick={handleClose}>Exit Group</MenuItem>
+                        <MenuItem onClick={handleClose}>Remove Group</MenuItem>
+                    </Menu>
+    
+                    <CardMedia
+                        component="img"
+                        image={ c.IMG+'/'+grp.image }
+                        alt="Paella dish"
+                        sx={{ height: '10em' }}
+                    />
+                    <CardContent>
+                        <Typography variant="body2">
+                        {grp.groupDetails.substring(0, 75)}
+                        </Typography>
+                    </CardContent>
+                    <CardActions sx={{ padding: '16px' }}>
+                        <Typography className="text-light" variant="body2" style={{'--bs-text-opacity': '.4'}}>5.7k members</Typography>
+                        <AvatarGroup className="ms-auto" max={4} spacing="small">
+                            <Avatar alt="Remy Sharp" src={ groupImg.userOne } />
+                            <Avatar alt="Travis Howard" src={ groupImg.userOne } />
+                            <Avatar alt="Cindy Baker" src={ groupImg.userOne } />
+                            <Avatar alt="Agnes Walker" src={ groupImg.userOne } />
+                            <Avatar alt="Trevor Henderson" src={ groupImg.userOne } />
+                        </AvatarGroup>
+                    </CardActions>
+                </Card>  
+                </div> 
+                )
+            })}       
     </div>
     </>
   )
