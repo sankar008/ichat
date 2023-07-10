@@ -29,7 +29,7 @@ import Backdrop from '@mui/material/Backdrop';
 import AccountType from './AccountType.js';
 
 
-import Album from './particals/album'
+import Album from './particals/albam'
 import { IoIosImages } from 'react-icons/io';
 import { IoMdImages } from 'react-icons/io';
 
@@ -99,6 +99,23 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const styleAvatar = (profAvatar) => ({
+  height: '21.75rem', 
+  borderRadius: 5,
+  [profAvatar.breakpoints.up('md')]: {
+    // width: 600,
+    width: '21.75rem', 
+  },
+  [profAvatar.breakpoints.up('sm')]: {
+    // width: 600,
+    width: '18.5rem', 
+  },
+  [profAvatar.breakpoints.down('sm')]: {
+    // width: 600,
+    width: '100%', 
+  },
+})
 
 
 
@@ -210,11 +227,7 @@ export default function Profile() {
                       </>
                     }
                   >
-                      <Avatar src={ userImage } alt={`Mandy Richardson`} sx={{
-                        width: '21.75rem', 
-                        height: '21.75rem', 
-                        borderRadius: 5, 
-                        }} 
+                      <Avatar src={ userImage } alt={`Mandy Richardson`} sx={ styleAvatar } 
                       />
                 </Badge>
               </div>

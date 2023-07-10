@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-import './album.scss'
+import './albam.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
@@ -87,7 +87,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     ownerState: PropTypes.any,
   };
   
-  const style = {
+  const style = (theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -100,7 +100,16 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     boxShadow: 24,
     p: 2,
     pb: 0,
-  };
+    [theme.breakpoints.up('md')]: {
+      width: '50vw',
+    },
+    [theme.breakpoints.down('md')]: {
+        width: 500,
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '90%',
+    },
+  });
 
   const initialvalue = {
     title: "",
@@ -155,16 +164,16 @@ const Index = () => {
       >
         <Fade in={open}>
           <Box className="mdlSD" sx={style}>
-            <Grid container spacing={2} sx={{ '& .MuiTextField-root': { width: '100%' }, }}>
+            <Grid container spacing={2} sx={{ width: 'calc(100% + 32px)' }}>
                 <Grid item xs={12} sx={{ borderBottom: '1px solid #f3f3f3' }}>
                   <ThemeProvider theme={darkTheme}>
-                    <Button sx={{ position: 'absolute', right: '0', top: '0' }} onClick={albumClose}><IoMdClose size="20" /> &nbsp; Close</Button>
+                    <Button sx={{ position: 'absolute', right: '.5em', top: '10px' }} onClick={albumClose}><IoMdClose size="20" /> {window.innerWidth < 900 ? '':(<>&nbsp; Close</>)}</Button>
                     <Typography id="spring-modal-title" className='mb-2' variant="h6" component="h2">
                         Create Your Album
                     </Typography>
                   </ThemeProvider>
                 </Grid>
-                <Grid item lg={3} md={4} xs={12} sx={{ pr: '16px', py: 2, background: '#161616', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <Grid item lg={4} md={4} xs={12} sx={{ pr: '16px', py: 2, background: '#161616', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <ThemeProvider theme={darkTheme}>
                       <TextField
                           id="fieldID-placed-here"
@@ -204,14 +213,16 @@ const Index = () => {
                       <Button className='mt-auto' variant="contained" type="submit">Submit</Button>
                     </ThemeProvider>
                 </Grid>
-                <Grid item lg={9} md={8} xs={12}>
-                    <ImageList className='album-images' sx={{ width: 500, minHeight: 250 }} cols={3} data-id={imageArray.length} rowHeight={164}>
+                <Grid item lg={8} md={8} xs={12}>
+                    <ImageList className='album-images' sx={{ /* width: 500, */ minHeight: 250, paddingRight: '16px' }} cols={3} data-id={imageArray.length} rowHeight={164}>
                         {imageData.map((item, key) => (
                             <ImageListItem key={key} sx={{ position: 'relative' }}>
                                 <img
+                                    className=""
                                     src={item}
                                     loading="lazy"
                                     alt=""
+                                    sx={{ aspectRatio: '1/1' }}
                                 />
                                 <div className="actionBtns">
                                     <ul className="list-inline">

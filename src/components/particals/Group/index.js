@@ -7,6 +7,8 @@ import * as groupImg from '../../../assets/img/ImgLib.js'
 
 import { FaHeartbeat, FaShare, FaUserAltSlash, FaEllipsisV } from 'react-icons/fa'
 import { AvatarGroup, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, List, ListItem, Typography, Menu, MenuItem, ImageListItem, Modal, Box, createTheme, ThemeProvider, TextField, FormControlLabel, FormControl, InputLabel, Select } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import styled from '@emotion/styled'
 
 import { FaEye, FaPlus, FaTimes } from 'react-icons/fa'
@@ -19,17 +21,27 @@ import { toast } from "react-toastify";
 
 
 
-  const style = {
+  const style = (theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: 700,
+    // width: 600,
     bgcolor: '#212121',
     color: '#aaaaaa',
     border: '2px solid #000',
     boxShadow: 24,
-  };
+    [theme.breakpoints.up('md')]: {
+        width: 600,
+    },
+    [theme.breakpoints.down('md')]: {
+        width: 500,
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '90%',
+    },
+  });
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -155,6 +167,8 @@ const Index = () => {
       }, []);
 
     
+
+    
   return (
     <>
     <Modal
@@ -167,7 +181,7 @@ const Index = () => {
         <Box sx={style}>
             <ThemeProvider theme={darkTheme}>
                 <Box sx={{ px: 4, py: 1, borderBottom: '1px solid #424242' }}>
-                    <Button sx={{ position: 'absolute', right: '2em', top: '5px' }} onClick={handleModClose}><IoMdClose size="20" /> &nbsp; Close</Button>
+                    <Button sx={{ position: 'absolute', right: '2em', top: '5px' }} onClick={handleModClose}><IoMdClose size="20" /> {window.innerWidth < 900 ? '':(<>&nbsp; Close</>)}</Button>
                     <Typography id="spring-modal-title" className='' variant="h6" component="h2">
                         Create Your Album
                     </Typography>
@@ -243,7 +257,7 @@ const Index = () => {
 
         <div className="col-lg-3 col-md-6">
 
-            <ImageListItem cols={1} rows={1} sx={{ display: 'flex'}} style={{ height: '100%'}} >
+            <ImageListItem cols={1} rows={1} sx={{ display: 'flex'}} style={{ height: '100%', minHeight: '10rem'}} >
                 <Link style={{ flex: '1 1 auto' }} onClick={handleModOpen}>
                     <Card className="d-flex align-items-center justify-content-center text-light" sx={{ height: '100%', background: 'linear-gradient(45deg, #181818, #090909)', border: '1px solid #262626' }}>
                         <FaPlus size="60"/>
