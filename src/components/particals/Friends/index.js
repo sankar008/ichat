@@ -4,7 +4,7 @@ import './friends.scss'
 import * as friendImg from '../../../assets/img/ImgLib.js'
 
 import { FaUserAltSlash } from 'react-icons/fa'
-import { Avatar, Button, Card, CardActions, CardContent, IconButton, List, ListItem, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardActions, CardContent, IconButton, List, ListItem, Tooltip, Typography } from '@mui/material'
 import axios from "axios";
 import * as c from "../../../api/constant";
 
@@ -36,7 +36,7 @@ const Index = () => {
                   <CardContent>
                       <div className="wrapper">
                           <div className="text-end">
-                              <IconButton className='btn btn-light' color="light"><FaUserAltSlash /></IconButton>
+                            <Tooltip title="Remove from friend list"><IconButton className='btn btn-light' color="light" sx={{color: '#f3f3f35a', '&:hover': {color: '#ffffff'}, '&:focus, &:active': {color: '#ffffff', '--bs-btn-active-color': '#fff', '--bs-btn-active-bg': '#c6c7c830'}}}><FaUserAltSlash /></IconButton></Tooltip>
                           </div>
                           <div className="d-flex flex-column align-items-center">
                               <Avatar 

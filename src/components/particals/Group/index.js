@@ -272,6 +272,12 @@ const Index = () => {
                 return (
                     <div className="col-lg-3 col-md-6">
                     <Card key={key} className='text-bg-dark'>
+                    <CardMedia
+                        component="img"
+                        image={ c.IMG+'/'+grp.image }
+                        alt="Paella dish"
+                        sx={{ height: '10em' }}
+                    />
                     <CardHeader
                        
                         action={
@@ -317,12 +323,6 @@ const Index = () => {
                         <MenuItem onClick={handleClose}>Remove Group</MenuItem>
                     </Menu>
     
-                    <CardMedia
-                        component="img"
-                        image={ c.IMG+'/'+grp.image }
-                        alt="Paella dish"
-                        sx={{ height: '10em' }}
-                    />
                     <CardContent>
                         <Typography variant="body2">
                         {grp.groupDetails.substring(0, 75)}

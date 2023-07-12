@@ -23,6 +23,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { Avatar, Badge, Box, Button, ButtonGroup, Card, IconButton, ImageListItemBar, Modal, Typography } from '@mui/material';
+// import Badge, { badgeClasses } from '@mui/base/Badge';
 import { useSpring, animated } from '@react-spring/web';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
@@ -298,18 +299,33 @@ export default function Profile() {
 
               <Tabs
                   defaultActiveKey="photos"
-                  id="uncontrolled-tab-example"
-                  className="mb-3"
+                  id="profile-tabs"
+                  className="profTabs mb-3"
                   variant="pills"
                   fill
                 >
-                  <Tab eventKey="photos" title="Photos">
+                  <Tab eventKey="photos" title={
+                    <>
+                      Photos &nbsp;
+                      <Badge>302</Badge>
+                    </>
+                    }>
                       <Album />                      
                   </Tab>                  
-                  <Tab eventKey="friends" title="Friends">
+                  <Tab eventKey="friends" title={
+                    <>
+                      Friends &nbsp;
+                      <Badge>67</Badge>
+                    </>
+                    }>
                       <Friends />
                   </Tab>
-                  <Tab eventKey="group" title="Group">
+                  <Tab eventKey="group" title={
+                    <>
+                      Group &nbsp;
+                      <Badge>4</Badge>
+                    </>
+                    }>
                       <Group />
                   </Tab>
               </Tabs>
